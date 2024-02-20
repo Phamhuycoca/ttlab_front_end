@@ -1,19 +1,35 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, NavigationGuardWithThis, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import VueRouteMiddleware, { GLOBAL_MIDDLEWARE_NAME } from './middleware';
+import AuthMiddleware from './authMiddleware';
+import { PageName } from '@/common/constants';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+   
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path:'/login',
+    name: PageName.LOGIN_PAGE,
+    component:()=>import('../components/features/auth/page/LoginForm.vue'),
+    meta: {
+      public: true,
+    }
+  },
+  {
+    path:'/admin',
+    name: PageName.DASHBOARD_PAGE ,
+    component:()=>import('../views/AdminView.vue'),
+    children:[
+      {
+        path:'sanpham',
+        name: 'sanpham',
+        component:()=>import('../components/features/product/page/Product.vue'),
+      }
+    ]
   }
 ]
 
@@ -21,5 +37,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+// router.beforeEach(
+//   VueRouteMiddleware({
+//     [GLOBAL_MIDDLEWARE_NAME]: AuthMiddleware,
+//   }) as NavigationGuardWithThis<unknown>,
+// );
 
 export default router
