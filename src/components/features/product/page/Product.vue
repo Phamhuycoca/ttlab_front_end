@@ -111,6 +111,10 @@ const loadData = async () => {
     products.value = data.items;
     lengthPage.value = Math.ceil(data.totalItems / seletedValue.value);
 };
+watch(page, (newVal) => {
+    DEFAULT_COMMON_LIST_QUERY.page = newVal
+    loadData()
+})
 watch(seletedValue, (newval) => {
     DEFAULT_COMMON_LIST_QUERY.limit = newval
     DEFAULT_COMMON_LIST_QUERY.page = 1
