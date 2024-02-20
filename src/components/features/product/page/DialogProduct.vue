@@ -3,7 +3,7 @@
     <v-dialog max-width="500px" v-model="dialog">
         <v-card>
             <v-card-title style="font-weight: bold;">
-                <h4>Tạo mới sản phẩm</h4>
+                <h4>{{ props.currentValue === '' ? 'Tạo mới sản phẩm' : 'Chỉnh sửa sản phẩm' }}</h4>
             </v-card-title>
             <v-container style="background-color: rgb(247, 247, 247);">
                 <v-row>
@@ -66,22 +66,37 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn @click="handleClose" text="Hủy" style="border: 1px solid #ccc;" width="70"></v-btn>
-                <v-btn text="Tạo mới" @click="createProduct" color="white" class="mr-2" style="background-color: #0F60FF;"
-                    width="110"></v-btn>
+                <v-btn :text="props.currentValue === '' ? 'Tạo mới' : 'Chỉnh sửa'" @click="createProduct" color="white"
+                    class="mr-2" style="background-color: #0F60FF;" width="110"></v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { ProductStore } from '../store/product.store'
 
 const productStore = new ProductStore();
-const props = defineProps(['close']);
+const props = defineProps(['close', 'currentValue']);
 const emit = defineEmits();
+console.log(props.currentValue);
+const createValidationSchema = () => {
+    if (props.currentValue === '') {
+        return yup.object({
+            name: yup.string().required('Vui lòng nhập tên sản phẩm'),
+            price: yup.string().required('Vui lòng nhập giá'),
+            quantity: yup.string().required('Vui lòng nhập số lượng'),
+            file: yup.string().required('Vui lòng nhập ảnh sản phẩm'),
+        });
+    } else {
+        return yup.object({
+        });
+    }
+};
+
 
 const {
     errors,
@@ -89,12 +104,7 @@ const {
     resetForm,
     defineField
 } = useForm({
-    validationSchema: yup.object({
-        name: yup.string().required('Vui lòng nhập tên sản phẩm'),
-        price: yup.string().required('Vui lòng nhập giá'),
-        quantity: yup.string().required('Vui lòng nhập số lượng'),
-        file: yup.string().required('Vui lòng nhập ảnh sản phẩm'),
-    }),
+    validationSchema: createValidationSchema(),
 });
 
 const [name, nameAttrs] = defineField('name');
@@ -103,6 +113,18 @@ const [quantity, quantityAttrs] = defineField('quantity');
 const [file, fileAttrs] = defineField('file');
 const [description] = defineField('description');
 const [id] = defineField('id');
+
+watch(() => props.currentValue, (newValue, oldValue) => {
+    if (newValue === '') {
+        resetForm();
+    } else {
+        name.value = newValue.name;
+        price.value = newValue.price;
+        description.value = newValue.description;
+        quantity.value = newValue.quantity;
+        id.value = newValue.id;
+    }
+});
 
 const handleClose = () => {
     resetForm();
@@ -117,21 +139,30 @@ const handleImageChange = (event) => {
 };
 
 const createProduct = handleSubmit(async values => {
-    const formData = new FormData();
-    formData.append('name', values.name);
-    formData.append('price', values.price);
-    formData.append('quantity', values.quantity);
-    formData.append('description', values.description);
-    formData.append('file', imageFile.value);
     try {
-        const res = await productStore.createProduct(formData);
+        if (props.currentValue == '') {
+            const formData = new FormData();
+            formData.append('name', values.name);
+            formData.append('price', values.price);
+            formData.append('quantity', values.quantity);
+            formData.append('description', values.description);
+            formData.append('file', imageFile.value);
+            const res = await productStore.createProduct(formData);
+        } else {
+            const formData = new FormData();
+            formData.append('name', values.name);
+            formData.append('price', values.price);
+            formData.append('quantity', values.quantity);
+            formData.append('description', values.description);
+            formData.append('file', imageFile.value);
+            formData.append('id', id.value);
+            const res = await productStore.updateProduct(id.value, formData);
+        }
     } catch (error) {
         console.error('Error creating product:', error);
+    } finally {
+        handleClose();
+        emit('updateData');
     }
 });
 </script>
-
-<style>
-/* ... (your existing styles) ... */
-</style>
-<style></style>

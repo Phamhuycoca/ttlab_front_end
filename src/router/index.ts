@@ -28,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
         path:'sanpham',
         name: 'sanpham',
         component:()=>import('../components/features/product/page/Product.vue'),
+      },
+      {
+        path:'user',
+        name: 'user',
+        component:()=>import('../components/features/user/page/User.vue')
       }
     ]
   }

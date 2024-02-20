@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import {productApi} from '../services/product.api'
 import { IProduct } from "./interface";
 import { DEFAULT_COMMON_LIST_QUERY } from "@/common/constants";
-import { closeLoading, showLoading, showSuccessNotification } from '@/common/helpers';
+import { closeLoading, showErrorNotification, showLoading, showSuccessNotification } from '@/common/helpers';
 export const ProductStore = defineStore('productStore', () => {
     async function getProducts(){
     showLoading(true)
@@ -29,14 +29,45 @@ export const ProductStore = defineStore('productStore', () => {
             showSuccessNotification(res.message)
             return res.data;
         }
+        showErrorNotification(res.error);
     }catch(error){
-        console.error(error);
+        console.log('1');
+        console.log(error);
     }finally{
         closeLoading(false);
     }
     }
+    async function updateProduct(id:any,data:FormData){
+        showLoading(true)
+        try{
+            const res = await productApi._updateProduct(id,data);
+            if(res.success){
+                showSuccessNotification(res.message);
+            }
+        }catch(error){
+            console.log(error);
+        }finally{
+            closeLoading(false);
+        }
+    }
+    async function deleteProduct(id:any) {
+    showLoading(true)
+        try{
+            const res = await productApi._deleteProduct(id);
+            if(res.success){
+                showSuccessNotification(res.message);
+            }
+        }catch(error)  {
+            console.error(error);
+        }finally{
+            closeLoading(false);
+        }
+    }
+
     return {
         getProducts,
-        createProduct
+        createProduct,
+        deleteProduct,
+        updateProduct
       };
 });

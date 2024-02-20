@@ -1,18 +1,19 @@
 <template>
     <v-app>
         <v-layout>
-            <v-navigation-drawer v-model="drawer" :rail="rail" class="navigation_drawer" permanent>
+            <v-navigation-drawer v-model="drawer" :rail="rail" class="navigation_drawer" permanent width="260">
                 <v-toolbar @click.stop="rail = !rail" style="background-color: white;">
                     <v-row>
                         <v-col cols="8">
-                            <v-toolbar-title @click.stop="rail = !rail" class="ma-3">
-                                <v-img width="250"
+                            <v-toolbar-title @click.stop="rail = !rail" class="ma-3" width="150px" height="28px">
+                                <v-img
                                     src="https://res.cloudinary.com/dgtjdhrnq/image/upload/v1705460127/logo1_adshdl.png"></v-img>
                             </v-toolbar-title>
                         </v-col>
-                        <v-col class="text-center" cols="4">
-                            <v-img src="../assets/icon/indent-decrease.png" height="30" @click.stop="rail = !rail"
-                                class="mt-2"></v-img>
+                        <v-spacer></v-spacer>
+                        <v-col class="text-right mt-2" cols="3">
+                            <v-img src="../assets/icon/indent-decrease.png" height="24" width="24"
+                                @click.stop="rail = !rail" class="mt-2 ml-2"></v-img>
                         </v-col>
                     </v-row>
                 </v-toolbar>
@@ -21,8 +22,7 @@
                     <v-list-item v-show="this.rail == false" class="text-uppercase"
                         style="opacity: 0.6;font-size: 13px;">Quản
                         lý sản phẩm</v-list-item>
-                    <v-list-item prepend-icon="mdi-apps" title="Sản phẩm" value="Sản phẩm"
-                        to='/admin/sanpham'></v-list-item>
+                    <v-list-item prepend-icon="mdi-apps" title="Sản phẩm" value="Sản phẩm" to='sanpham'></v-list-item>
                     <v-list-item prepend-icon="mdi-account-group" title="User" value="User" to='user'></v-list-item>
                 </v-list>
             </v-navigation-drawer>
@@ -44,14 +44,12 @@
         </v-layout>
     </v-app>
 </template>
-
 <script lang="ts" setup>
 import { ref } from "vue";
 import { RouterView } from "vue-router";
 const drawer = ref(true);
 const rail = ref(false);
 </script>
-
 <style scoped>
 @media (min-width: 1200px) {
     .reposive {
