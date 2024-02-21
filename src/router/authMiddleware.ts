@@ -17,12 +17,6 @@ export default async (
   const isExpired = dayjs().isAfter(dayjs(tokenExpiredAt),'second');
   const IS_AUTHENTICATED = tokenExpiredAt && !isExpired && hasToken;
 
-if(isExpired){
-  const hasToken = localStorageAuthService.setAccessToken(localStorageAuthService.getRefeshToken())
-  const tokenExpiredAt = localStorageAuthService.setAccessTokenExpiredAt(localStorageAuthService.getAccessTokenExpiredAt())
-  console.log(hasToken);
-  console.log(tokenExpiredAt);
-}
 
 
   if (!IS_AUTHENTICATED && to.name !== PageName.LOGIN_PAGE && !IS_PUBLIC) {

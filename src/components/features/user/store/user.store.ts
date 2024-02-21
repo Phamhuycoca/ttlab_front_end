@@ -3,6 +3,7 @@ import { DEFAULT_COMMON_LIST_QUERY } from "@/common/constants";
 import { closeLoading, showErrorNotification, showLoading, showSuccessNotification } from '@/common/helpers';
 import { IUser } from "./interface";
 import { userApi } from "../service/user.api";
+import router from './../../../../router/index';
 export const userStore = defineStore('userStore', () => {
     async function getUsers(){
     showLoading(true)
@@ -13,8 +14,15 @@ export const userStore = defineStore('userStore', () => {
                 items:res.data.items,
                 totalItems:res.data.totalItems
             };
+        }else{
+            // if(res.status ===419){
+            //     return router.push('/login');
+            // }else if(res.status ===401){
+            showErrorNotification(res.message);
+
+                return {items:[],totalItems:1}
+            // }
         }
-        return null;
        }catch(error){
         console.error(error);
     }finally{

@@ -12,6 +12,13 @@ loadFonts()
 createApp(App)
   .use(router)
   .use(pinia)
-  .use(useToast)
+  .use(useToast, {
+    position: 'top-right',
+    timeout: 1500,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+  })
   .use(vuetify)
   .mount('#app')

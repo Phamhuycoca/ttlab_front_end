@@ -1,4 +1,5 @@
 import type { IBodyResponse, ICommonListQuery, IGetListResponse } from '@/common/interfaces';
+import localStorageAuthService from '@/common/storages/authStorage';
 import { type AxiosInstance } from 'axios';
 
 
@@ -40,11 +41,20 @@ export class ApiService {
     ): Promise<IBodyResponse<IGetListResponse<T>>> {
         return this.client.get(`${this.baseUrl}`, {
             params: queryString,
-        });
+            headers: {
+                'Authorization': 'Bearer '+localStorageAuthService.getAccessToken()
+              }
+            }
+        );
     }
 
     _getDetail<R>(id: number | string): Promise<R> {
-        return this.client.get<R, R>(this.detailUrl + '/' + id);
+        return this.client.get<R, R>(this.detailUrl + '/' + id,{
+            headers: {
+                'Authorization': 'Bearer '+localStorageAuthService.getAccessToken()
+              }
+            }
+        );
     }
 
     _create<P, R>(params: P): Promise<R> {
@@ -56,6 +66,7 @@ export class ApiService {
     }
 
     _delete<R>(id: number | string): Promise<R> {
-        return this.client.delete<R, R>(this.deleteUrl + '/' + id);
+        return this.client.delete<R, R>(this.deleteUrl + '/' + id,{
+        });
     }
 }

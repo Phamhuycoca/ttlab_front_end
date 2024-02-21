@@ -14,6 +14,10 @@ export const ProductStore = defineStore('productStore', () => {
                 totalItems:res.data.totalItems
             };
         }
+        else{
+            showErrorNotification(res.message);
+            return {items:[],totalItems:1}
+        }
         return null;
        }catch(error){
         console.error(error);
