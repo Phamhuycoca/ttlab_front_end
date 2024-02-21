@@ -1,8 +1,10 @@
-// vue.config.js
-module.exports = {
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  transpileDependencies: true,
+
   pluginOptions: {
     vuetify: {
-      // Các tùy chọn cấu hình của Vuetify ở đây
-    },
-  },
-};
+			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
+		}
+  }
+})
