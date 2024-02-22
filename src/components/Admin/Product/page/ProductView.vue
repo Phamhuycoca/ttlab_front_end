@@ -1,56 +1,56 @@
 <template>
     <div class="px-8 mt-4">
         <v-row>
-            <v-col cols="12" sm="6" md="6" lg="3">
+            <v-col sm="4" md="5" lg="3">
                 <v-text-field label="Tìm kiếm" append-inner-icon="mdi-magnify" density="compact" variant="outlined">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col cols="12" sm="12" md="4" lg="9" class="text-right">
-                <v-btn color="#0F60FF" prepend-icon="mdi-plus" height="40" width="130"
+            <v-col sm="1" md="3" lg="4" class="text-right">
+                <v-btn color="#0F60FF" prepend-icon="mdi-plus" min-height="40" min-width="122"
                     @click="dialog = true, currentValue = ''">Tạo
                     mới</v-btn>
             </v-col>
         </v-row>
         <v-row>
             <v-col cols="12">
-                <v-card elevation="3" style="border-radius: 8px;" class="mb-4">
-                    <v-row class="mt-1">
+                <v-card elevation="3" class="rounded-lg mb-4" min-height="726">
+                    <v-row>
                         <v-col cols="12">
-                            <v-card variant="text" class="ma-4">
+                            <v-card variant="text">
                                 <v-table density="compact">
-                                    <thead>
+                                    <thead style="height: 47px;">
                                         <tr>
-                                            <th class=" text-left text-uppercase text-medium-emphasis">
+                                            <th class=" text-left text-disabled text-uppercase text-medium-emphasi">
                                                 Tên sản phẩm
                                             </th>
-                                            <th class="text-left text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasi">
                                                 Giá
                                             </th>
-                                            <th class="text-left text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasi">
                                                 Số lượng
                                             </th>
-                                            <th class="text-left text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasi">
                                                 Mô tả
                                             </th>
-                                            <th class="text-left text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasi">
                                                 Ảnh
                                             </th>
-                                            <th class="text-center text-uppercase text-medium-emphasis">
+                                            <th class="text-center text-disabled text-uppercase text-medium-emphasi">
                                                 Hành động
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(item, i) in products" :key="i" style="height: min-content;">
+                                        <tr v-for="(item, i) in products" :key="i" style="height: 58px;">
                                             <td>{{ item.name }}</td>
-                                            <td>$ {{ item.price }}</td>
+                                            <td>${{ item.price }}</td>
                                             <td>{{ item.quantity }}</td>
-                                            <td class="v-text-truncate">
+                                            <td class="text-truncate font-weight-medium" style="max-width: 150px;">
                                                 {{ item.description }}
                                             </td>
                                             <td class="text-center">
-                                                <v-img :src="item.image" :width="36" contain height="36" />
+                                                <v-img :src="item.image" width="36" contain height="36" />
                                             </td>
                                             <td class="text-center">
                                                 <v-icon @click="currentValue = item, dialog = true"
@@ -65,11 +65,11 @@
                             </v-card>
                         </v-col>
                     </v-row>
-                    <v-row class="ma-2">
-                        <v-col cols="8">
+                    <v-row>
+                        <v-col lg="8" md="4" sm="1">
                             <v-row>
-                                <p class="mt-5 opacity">Showing</p>
-                                <v-col cols="2">
+                                <p class="mt-5 ml-4 opacity">Showing</p>
+                                <v-col sm="1" md="2" lg="2">
                                     <v-select v-model="seletedValue" density="compact"
                                         :items="['10', '20', '25', '30', '50']" variant="outlined"></v-select>
                                 </v-col>
@@ -108,6 +108,8 @@ import Confirm from '../../../../common/Element/Confirm.vue';
 import { showSuccessNotification, showErrorNotification } from '../../../../common/helpers';
 const { fetchProducts, query, getAll, searchProducts } = useProduct()
 
+
+
 const loadData = async () => {
     const data = await fetchProducts();
     products.value = data?.items;
@@ -141,7 +143,7 @@ onMounted(() => {
 <style scoped>
 .text-truncate {
     overflow: hidden;
-    white-space: nowrap;
+    white-space: wrap;
     text-overflow: ellipsis;
 }
 

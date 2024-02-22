@@ -45,7 +45,8 @@
                     <v-col cols="12" style="font-size: 13px;">
                         <p>Số điện thoại</p>
                         <v-text-field style="background-color: white;" label="Nhập số điện thoại" density="compact"
-                            v-model="phone" v-bind="phoneAttrs" single-line hide-details variant="outlined"></v-text-field>
+                            v-model="phone" v-bind="phoneAttrs" type="number" single-line hide-details
+                            variant="outlined"></v-text-field>
                         <div v-show="errors.phone" class="mt-2" style="color: red;">{{
                             errors.phone
                         }}</div>

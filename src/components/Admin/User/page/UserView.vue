@@ -1,12 +1,12 @@
 <template>
     <div class="px-8 mt-4">
         <v-row>
-            <v-col cols="12" sm="6" md="6" lg="3">
+            <v-col sm="12" md="5" lg="3">
                 <v-text-field label="Tìm kiếm" append-inner-icon="mdi-magnify" density="compact" variant="outlined">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col cols="12" sm="12" md="4" lg="9" class="text-right">
+            <v-col sm="1" md="3" lg="4" class="text-right">
                 <v-btn color="#0F60FF" prepend-icon="mdi-plus" height="40" width="130"
                     @click="dialog = true, currentValue = ''">Tạo
                     mới</v-btn>
@@ -14,47 +14,52 @@
         </v-row>
         <v-row>
             <v-col cols="12">
-                <v-card elevation="3" class="rounded-lg">
+                <v-card elevation="3" class="rounded-lg mb-4" min-height="726">
                     <v-row>
                         <v-col cols="12">
                             <v-card variant="text">
                                 <v-table density="compact">
                                     <thead style="height: 47px;">
                                         <tr>
-                                            <th class="text-left text-uppercase text-medium-emphasi">
+                                            <th class="text-center text-disabled text-uppercase text-medium-emphasi">
                                                 Avatar
                                             </th>
-                                            <th class="text-left text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasis">
                                                 Tên người dùng
                                             </th>
-                                            <th class="text-left text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasis">
                                                 Email
                                             </th>
-                                            <th class="text-left text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasis">
                                                 Ngày sinh
                                             </th>
-                                            <th class="text-left text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasis">
                                                 Số điện thoại
                                             </th>
-                                            <th class="text-center text-uppercase text-medium-emphasis">
+                                            <th class="text-left text-disabled text-uppercase text-medium-emphasis">
                                                 Hành động
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody style="height: 58px;">
-                                        <tr v-for="(item, i) in users" :key="i">
+                                    <tbody>
+                                        <tr v-for="(item, i) in users" :key="i" style="height: 58px;">
                                             <td>
-                                                <v-img :src="item.avatar" :width="36" contain height="36" />
+                                                <v-img class="mx-auto" :src="item.avatar" width="36" contain height="36" />
                                             </td>
-                                            <td>{{ item.name }}</td>
-                                            <td>{{ item.email }}</td>
+                                            <td class="text-truncate font-weight-medium" style="max-width: 150px;">{{
+                                                item.name
+                                            }}</td>
+                                            <td class=" text-truncate" style="max-width: 150px;">
+                                                {{ item.email }}
+
+                                            </td>
                                             <td class="v-text-truncate">
                                                 {{ formatDatetime(item.birthday) }}
                                             </td>
                                             <td class="text-left">
                                                 {{ item.phone }}
                                             </td>
-                                            <td class="text-center">
+                                            <td class="text-left text-disabled">
                                                 <v-icon class="ma-1"
                                                     @click="dialog = true, currentValue = item">mdi-clipboard-edit-outline</v-icon>
                                                 <v-icon class="ma-1"
@@ -67,15 +72,15 @@
                             </v-card>
                         </v-col>
                     </v-row>
-                    <v-row class="ma-2">
-                        <v-col cols="8">
+                    <v-row>
+                        <v-col lg="8" md="4" sm="1">
                             <v-row>
-                                <p class="mt-5 opacity">Showing</p>
-                                <v-col cols="2">
-                                    <v-select v-model="seletedValue" density="compact"
+                                <p class="mt-5 ml-6 opacity">Showing</p>
+                                <v-col sm="1" md="1" lg="2" class="d-flex">
+                                    <v-select v-model="seletedValue" density="compact" style="max-width: 90px!important;"
                                         :items="['10', '20', '25', '30', '50']" variant="outlined"></v-select>
+                                    <p class="opacity mt-2 ml-1">of 50</p>
                                 </v-col>
-                                <p class="mt-5 opacity">of 50</p>
                             </v-row>
                         </v-col>
                         <v-col cols="4">
@@ -99,7 +104,7 @@ import UserDialog from './UserDialog.vue';
 import Confirm from '../../../../common/Element/Confirm.vue'
 const { fetchUsers, query, searchUsers } = useUser()
 import { userServiceApi } from '@/components/Admin/User/Service/user.api';
-import { showSuccessNotification, showErrorNotification } from '../../../../common/helpers';
+import { showSuccessNotification, showErrorNotification, truncateText } from '../../../../common/helpers';
 
 const currentValue = ref('');
 const users = ref([]);
@@ -148,6 +153,7 @@ const Remove = async () => {
 onMounted(() => {
     loadData();
 });
+
 </script>
 <style scoped>
 .v-pagination__prev {
