@@ -4,6 +4,7 @@ import { computed } from 'vue';
 import dayjs from '@/plugins/dayjs';
 import { authApi } from './auth.api';
 import { IBodyLogin } from './interfaces';
+import { showErrorNotification } from '@/common/helpers';
 
 export const useAuthStore = defineStore('authStore', () => {
   // profile name, email, etc
@@ -17,7 +18,7 @@ export const useAuthStore = defineStore('authStore', () => {
       localStorageAuthService.setRefeshToken(res.data?.refresh_token);
       localStorageAuthService.setRefeshTokenExpiredAt(res.data?.refresh_expiresIn);
       localStorageAuthService.setUserRole(res.data.profile.role);
-    }
+    } 
     return res;
   }
   const isAuthenticated = computed(() => {

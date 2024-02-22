@@ -140,7 +140,7 @@ const createNewUser = handleSubmit(async values => {
             if (res.success) {
                 showSuccessNotification(res.message)
             } else {
-                showErrorNotification(res.error)
+                res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
             }
         } else {
             const formData = new FormData();

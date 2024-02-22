@@ -34,6 +34,8 @@ const onSubmit = handleSubmit(async values => {
                 router.push('/')
             })
         }
+    } else {
+        showErrorNotification(res.message);
     }
 });
 
