@@ -2,12 +2,12 @@
     <div class="px-8 mt-4">
         <v-row>
             <v-col sm="12" md="5" lg="3" style="max-width: 316px;!important">
-                <v-text-field label="Tìm kiếm" @change="searchData()" v-model="search" append-inner-icon="mdi-magnify"
-                    density="compact" variant="outlined">
+                <v-text-field variant="solo" label="Tìm kiếm" @change="searchData()" v-model="search"
+                    append-inner-icon="mdi-magnify" density="compact">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col sm="1" md="3" lg="4" class="text-right">
+            <v-col sm="1" xs="1" md="3" lg="4" class="text-right">
                 <v-btn color="#0F60FF" prepend-icon="mdi-plus" height="40" width="130"
                     @click="dialog = true, currentValue = ''">Tạo
                     mới</v-btn>
@@ -80,7 +80,7 @@
                         <v-col lg="8" md="4" sm="1">
                             <v-row>
                                 <p class="ml-6 opacity">Showing</p>
-                                <v-col sm="1" md="1" lg="2" class="d-flex">
+                                <v-col sm="1" md="1" lg="3" class="d-flex">
                                     <v-select v-model="seletedValue" density="compact" style="max-width: 81px!important;"
                                         :items="['10', '20', '25', '30', '50']" variant="outlined"></v-select>
                                     <p class="opacity mt-2 ml-1">of {{ total }}</p>

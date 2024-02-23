@@ -23,9 +23,9 @@
                             <p>Email</p>
                             <span class="ml-1" style="color: blue;">*</span>
                         </div>
-                        <v-text-field style="background-color: white;" label="Nhập email" density="compact" single-line
-                            :error-messages="errors.email" v-model="email" v-bind="emailAttrs" hide-details
-                            variant="outlined"></v-text-field>
+                        <v-text-field style="background-color: white;" :disabled="isDisabled" label="Nhập email"
+                            density="compact" single-line :error-messages="errors.email" v-model="email" v-bind="emailAttrs"
+                            hide-details variant="outlined"></v-text-field>
                         <div v-show="errors.email" class="mt-2" style="color: red;">{{
                             errors.email
                         }}</div>
@@ -106,7 +106,7 @@ const [avatar, avatarAttrs] = defineField('avatar');
 const [phone, phoneAttrs] = defineField('phone');
 const [id] = defineField('id');
 const [file] = defineField('file');
-
+const isDisabled = computed(() => props.currentValue !== '' ? true : false);
 
 
 watch(() => props.currentValue, (newValue, oldValue) => {

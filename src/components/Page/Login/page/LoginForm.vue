@@ -32,7 +32,7 @@ const onSubmit = handleSubmit(async values => {
             setTimeout(() => {
                 showSuccessNotification('Đăng nhập thành công')
                 router.push('/')
-            })
+            }, 1000)
         }
     } else {
         showErrorNotification(res.message);

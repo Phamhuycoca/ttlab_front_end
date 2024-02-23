@@ -17,19 +17,20 @@
                         </v-col>
                     </v-row>
                 </v-toolbar>
-                <v-divider></v-divider>
                 <v-list density="compact" nav>
-                    <v-list-item v-show="this.rail == false" class="text-uppercase"
-                        style="opacity: 0.6;font-size: 13px;">Quản
+                    <v-list-item class="text-uppercase" style="opacity: 0.6;font-size: 13px;">Quản
                         lý sản phẩm</v-list-item>
-                    <v-list-item prepend-icon="mdi-apps" title="Sản phẩm" value="Sản phẩm"
-                        to='/admin/sanpham'></v-list-item>
+                    <v-list-item prepend-icon="mdi-apps" title="Sản phẩm" to='/admin/sanpham'>
+                    </v-list-item>
                     <v-list-item prepend-icon="mdi-account-group" title="User" value="User" to='/admin/user'></v-list-item>
                 </v-list>
             </v-navigation-drawer>
             <v-app-bar class="px-4" color="rgb(247, 247, 247)" :elevation="0" rounded="0">
                 <v-icon class="d-sm-block d-md-none" @click="drawer = !drawer, rail = !rail">mdi-menu</v-icon>
-                <h3 class="reposive ml-4">{{ title }}</h3>
+                <h3 class="title ml-4">
+                    {{ router.currentRoute.value.name === "product" ? "Quản lý sản phẩm" : "Quản lý người dùng" }}
+                </h3>
+
                 <v-spacer></v-spacer>
                 <v-btn>
                     <v-badge content="5" color="red">
@@ -40,21 +41,18 @@
                     <v-img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
                 </v-avatar>
             </v-app-bar>
-            <v-main style="background-color: rgb(247, 247, 247);min-height: 100vh;">
+            <v-main style="background-color: rgb(250, 249, 249);min-height: 100vh;">
                 <router-view></router-view>
             </v-main>
         </v-layout>
     </v-app>
 </template>
-// Your component file (e.g., AdminView.vue)
 <script lang="ts" setup>
+
 import { ref, onMounted, computed } from 'vue';
 import router from '../router';
 const drawer = ref(true);
-const rail = ref(true);
-
-onMounted(() => {
-});
+const rail = ref(false);
 
 </script>
 

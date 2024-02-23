@@ -1,16 +1,13 @@
-import router from "@/router";
-import { defineStore } from "pinia";
+import router from '@/router';
+import { defineStore } from 'pinia';
 
-interface TitleState {
-  title: string;
-}
-
-export const titleStore = defineStore("titleStore", {
-  state: (): TitleState => ({
-    title: ""
+export const titleStore = defineStore({
+  id: 'title',
+  state: () => ({
+    title: ''
   }),
-  actions: () => ({
-    getTitle: function (this: TitleState) {
+  actions: {
+    setTitle() {
       if (router.currentRoute.value.name === "product") {
         this.title = "Quản lý sản phẩm";
       }
@@ -18,5 +15,5 @@ export const titleStore = defineStore("titleStore", {
         this.title = "Quản lý người dùng";
       }
     }
-  })
+  }
 });

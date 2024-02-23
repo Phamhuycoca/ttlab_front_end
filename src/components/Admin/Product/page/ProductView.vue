@@ -3,7 +3,7 @@
         <v-row>
             <v-col sm="4" md="5" lg="3" style="max-width: 316px;!important">
                 <v-text-field label="Tìm kiếm" @change="searchData()" v-model="search" append-inner-icon="mdi-magnify"
-                    density="compact" variant="outlined">
+                    density="compact" variant="solo">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
@@ -53,7 +53,7 @@
                                             <td class="text-center">
                                                 <v-img :src="item.image" width="36" contain height="36" />
                                             </td>
-                                            <td class="text-center">
+                                            <td class="text-center text-disabled">
                                                 <v-icon @click="currentValue = item, dialog = true"
                                                     class="ma-1">mdi-clipboard-edit-outline</v-icon>
                                                 <v-icon @click="dialogremove = true, id = item.id"
@@ -70,7 +70,7 @@
                         <v-col lg="8" md="4" sm="1">
                             <v-row>
                                 <p class="mt-5 ml-6 opacity">Showing</p>
-                                <v-col sm="1" md="1" lg="2" class="d-flex">
+                                <v-col sm="1" md="1" lg="3" class="d-flex">
                                     <v-select v-model="seletedValue" density="compact" style="max-width: 81px!important;"
                                         :items="['10', '20', '25', '30', '50']" variant="outlined"></v-select>
                                     <p class="opacity mt-2 ml-1">of {{ total }}</p>

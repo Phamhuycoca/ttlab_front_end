@@ -6,7 +6,7 @@ import { loadFonts } from './plugins/webfontloader';
 import useToast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 import { createPinia } from 'pinia';
-
+import '../public/index.css'
 // Import Font Awesome styles
 import '@fortawesome/fontawesome-free/css/all.css';
 
