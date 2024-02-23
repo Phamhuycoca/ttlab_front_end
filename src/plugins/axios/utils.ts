@@ -34,9 +34,10 @@ export const sendRefreshToken = async () => {
       }
     );
     if (response?.status === HttpStatus.CREATA_AT) {
-      localStorageAuthService.setAccessToken(response.data?.accessToken);
-      localStorageAuthService.setAccessTokenExpiredAt(response.data?.expiresIn);
-      localStorageAuthService.setUserRole(response.data.profile.role);
+      localStorageAuthService.resetAll();
+      localStorageAuthService.setAccessToken(response.data?.data.accessToken);
+      localStorageAuthService.setAccessTokenExpiredAt(response.data.data?.expiresIn);
+      localStorageAuthService.setUserRole(response.data.data.profile.role);
       return;
     }
     logout(true);

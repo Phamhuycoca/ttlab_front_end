@@ -1,7 +1,7 @@
 <template>
     <div class="px-8 mt-4">
         <v-row>
-            <v-col sm="12" md="5" lg="3">
+            <v-col sm="12" md="5" lg="3" style="max-width: 316px;!important">
                 <v-text-field label="Tìm kiếm" @change="searchData()" v-model="search" append-inner-icon="mdi-magnify"
                     density="compact" variant="outlined">
                 </v-text-field>
@@ -19,10 +19,11 @@
                     <v-row>
                         <v-col cols="12">
                             <v-card variant="text">
-                                <v-table density="compact">
+                                <v-table density="compact" fixed-header>
                                     <thead style="height: 47px;">
                                         <tr>
-                                            <th class="text-center text-disabled text-uppercase text-medium-emphasi">
+                                            <th style="width: 10px;margin-left: 6px;!important"
+                                                class="text-left text-disabled text-uppercase text-medium-emphasi">
                                                 Avatar
                                             </th>
                                             <th class="text-left text-disabled text-uppercase text-medium-emphasis">
@@ -45,11 +46,13 @@
                                     <tbody>
                                         <tr v-for="(item, i) in users" :key="i" style="height: 58px;">
                                             <td>
-                                                <v-img class="mx-auto" :src="item.avatar" width="36" contain height="36" />
+                                                <v-img class="text-left" :src="item.avatar" width="36" contain
+                                                    height="36" />
                                             </td>
-                                            <td class="text-truncate font-weight-medium" style="max-width: 150px;">{{
-                                                item.name
-                                            }}</td>
+                                            <td class="text-left text-truncate font-weight-medium"
+                                                style="max-width: 150px;">{{
+                                                    item.name
+                                                }}</td>
                                             <td class=" text-truncate" style="max-width: 150px;">
                                                 {{ item.email }}
 
@@ -76,11 +79,11 @@
                     <v-row>
                         <v-col lg="8" md="4" sm="1">
                             <v-row>
-                                <p class="mt-5 ml-6 opacity">Showing</p>
+                                <p class="ml-6 opacity">Showing</p>
                                 <v-col sm="1" md="1" lg="2" class="d-flex">
-                                    <v-select v-model="seletedValue" density="compact" style="max-width: 90px!important;"
+                                    <v-select v-model="seletedValue" density="compact" style="max-width: 81px!important;"
                                         :items="['10', '20', '25', '30', '50']" variant="outlined"></v-select>
-                                    <p class="opacity mt-2 ml-1">of 50</p>
+                                    <p class="opacity mt-2 ml-1">of {{ total }}</p>
                                 </v-col>
                             </v-row>
                         </v-col>
@@ -112,6 +115,7 @@ const users = ref([]);
 const dialogremove = ref(false)
 const id = ref('');
 const dialog = ref(false);
+const total = ref('');
 let lengthPage = ref(1)
 let page = ref(1)
 const seletedValue = ref(DEFAULT_LIMIT_FOR_PAGINATION)
@@ -137,6 +141,7 @@ const formatDatetime = (date) => {
 const loadData = async () => {
     const data = await fetchUsers();
     users.value = data?.items;
+    total.value = data?.totalItems;
     lengthPage.value = Math.ceil(data?.totalItems / seletedValue.value);
 
 };
@@ -173,5 +178,11 @@ onMounted(() => {
 .v-pagination__prev {
     margin: 1px !important;
 
+}
+
+.opacity {
+    font-display: Public Sans;
+    margin-top: 18px;
+    opacity: 0.6;
 }
 </style>

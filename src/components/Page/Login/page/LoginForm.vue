@@ -27,7 +27,7 @@ const onSubmit = handleSubmit(async values => {
             setTimeout(() => {
                 showSuccessNotification('Đăng nhập thành công')
                 router.push('/admin')
-            }, 3000)
+            }, 1000)
         } else {
             setTimeout(() => {
                 showSuccessNotification('Đăng nhập thành công')
