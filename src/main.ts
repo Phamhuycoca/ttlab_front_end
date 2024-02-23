@@ -1,5 +1,3 @@
-// main.ts
-
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
@@ -9,10 +7,11 @@ import useToast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 import { createPinia } from 'pinia';
 
+// Import Font Awesome styles
+import '@fortawesome/fontawesome-free/css/all.css';
+
 loadFonts();
 
-
-// Use Pinia before other plugins and the router
 const pinia = createPinia();
 const app = createApp(App);
 app.use(pinia);

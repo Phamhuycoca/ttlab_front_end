@@ -2,7 +2,8 @@
     <div class="px-8 mt-4">
         <v-row>
             <v-col sm="12" md="5" lg="3">
-                <v-text-field label="Tìm kiếm" append-inner-icon="mdi-magnify" density="compact" variant="outlined">
+                <v-text-field label="Tìm kiếm" @change="searchData()" v-model="search" append-inner-icon="mdi-magnify"
+                    density="compact" variant="outlined">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
@@ -125,12 +126,6 @@ watch(page, (newVal) => {
     DEFAULT_COMMON_LIST_QUERY.page = newVal
     loadData()
 })
-const loadData = async () => {
-    const data = await fetchUsers();
-    users.value = data?.items;
-    lengthPage.value = Math.ceil(data?.totalItems / seletedValue.value);
-
-};
 const formatDatetime = (date) => {
     const dateObject = new Date(date);
     const ngay = dateObject.getDate().toString().padStart(2, '0');
@@ -138,6 +133,25 @@ const formatDatetime = (date) => {
     const nam = dateObject.getFullYear();
     const ngayThangNam = `${thang}/${ngay}/${nam}`;
     return ngayThangNam;
+}
+const loadData = async () => {
+    const data = await fetchUsers();
+    users.value = data?.items;
+    lengthPage.value = Math.ceil(data?.totalItems / seletedValue.value);
+
+};
+const search = ref('');
+watch(search, (newval) => {
+    DEFAULT_COMMON_LIST_QUERY.keyword = newval
+    if (newval != "")
+        return
+    DEFAULT_COMMON_LIST_QUERY.page = 1
+    searchData()
+})
+const searchData = async () => {
+    const data = await searchUsers();
+    users.value = data?.items;
+    lengthPage.value = Math.ceil(data?.totalItems / seletedValue.value);
 }
 const Remove = async () => {
     const data = await userServiceApi._delete(id.value);

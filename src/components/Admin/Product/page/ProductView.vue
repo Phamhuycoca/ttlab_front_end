@@ -2,7 +2,8 @@
     <div class="px-8 mt-4">
         <v-row>
             <v-col sm="4" md="5" lg="3">
-                <v-text-field label="Tìm kiếm" append-inner-icon="mdi-magnify" density="compact" variant="outlined">
+                <v-text-field label="Tìm kiếm" @change="searchData()" v-model="search" append-inner-icon="mdi-magnify"
+                    density="compact" variant="outlined">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
@@ -106,10 +107,22 @@ import { productServiceApi } from "@/components/Admin/Product/Service/product.ap
 import { useProduct } from '../Service/product.service';
 import Confirm from '../../../../common/Element/Confirm.vue';
 import { showSuccessNotification, showErrorNotification } from '../../../../common/helpers';
-const { fetchProducts, query, getAll, searchProducts } = useProduct()
+const { fetchProducts, searchProducts } = useProduct()
 
 
-
+const search = ref('');
+watch(search, (newval) => {
+    DEFAULT_COMMON_LIST_QUERY.keyword = newval
+    if (newval != "")
+        return
+    DEFAULT_COMMON_LIST_QUERY.page = 1
+    searchData()
+})
+const searchData = async () => {
+    const data = await searchProducts();
+    products.value = data?.items;
+    lengthPage.value = Math.ceil(data?.totalItems / seletedValue.value);
+}
 const loadData = async () => {
     const data = await fetchProducts();
     products.value = data?.items;

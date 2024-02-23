@@ -13,6 +13,15 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: '/index',
+    name:'index',
+    component:()=>import('../views/Index.vue'),
+    meta: {
+      public: true,
+    }
+
+  },
+  {
     path:'/login',
     name: PageName.LOGIN_PAGE,
     component:()=>import('../components/Page/Login/page/LoginForm.vue'),

@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-layout>
-            <v-navigation-drawer v-model="drawer" :rail="rail" class="navigation_drawer" permanent>
+            <v-navigation-drawer v-model="drawer" :rail="rail" class="d-sm-none d-md-block d-lg-block" permanent>
                 <v-toolbar @click.stop="rail = !rail" style="background-color: white;">
                     <v-row>
                         <v-col cols="8">
@@ -12,7 +12,7 @@
                         </v-col>
                         <v-col class="text-center" cols="4">
                             <v-img src="../assets/icon/indent-decrease.png" height="30" @click.stop="rail = !rail"
-                                class="mt-2"></v-img>
+                                class="mt-3 d-sm-none d-md-block d-lg-block"></v-img>
                         </v-col>
                     </v-row>
                 </v-toolbar>
@@ -27,6 +27,7 @@
                 </v-list>
             </v-navigation-drawer>
             <v-app-bar class="px-4" color="rgb(247, 247, 247)" :elevation="0" rounded="0">
+                <v-icon class="d-sm-block d-md-none" @click="drawer = !drawer, rail = !rail">mdi-menu</v-icon>
                 <h3 class="reposive">Danh sách sản phẩm</h3>
                 <v-spacer></v-spacer>
                 <v-btn>
@@ -34,13 +35,12 @@
                         <v-icon>mdi-bell</v-icon>
                     </v-badge>
                 </v-btn>
-                <v-avatar>
+                <v-avatar class="mr-4">
                     <v-img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
                 </v-avatar>
             </v-app-bar>
             <v-main style="background-color: rgb(247, 247, 247);min-height: 100vh;">
                 <router-view></router-view>
-
             </v-main>
         </v-layout>
     </v-app>
@@ -59,9 +59,17 @@ export default {
 </script>
 
 <style scoped>
-@media (min-width: 1200px) {
+@media (min-width: 600px) and (max-width: 960px) {
     .reposive {
         margin-left: 0.2%;
+    }
+
+    .img_drawer {
+        display: none;
+    }
+
+    .navigation_drawer {
+        display: none;
     }
 }
 </style>

@@ -28,11 +28,12 @@ export const useProduct = () => {
       }
     };
     const searchProducts = async () => {
+      loading.openLoading(true);
       try {
         const res = await productServiceApi._getList<IProduct>(query);
         if(res.success)
             return {
-              data:res.data.items,
+              items:res.data.items,
               totalItems:res.data.totalItems
             }
             return {
@@ -41,6 +42,8 @@ export const useProduct = () => {
               }
       } catch (error) {
         console.error('Error fetching products:', error);
+      }finally{
+      loading.openLoading(false);
       }
     };
   return {

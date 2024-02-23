@@ -29,13 +29,25 @@ export const useUser=()=>{
         }
       };
       const searchUsers = async () => {
+        loading.openLoading(true)
         try {
           const res = await userServiceApi._getList<IUser>(query);
+          console.log('search');
           if(res.success)
-              return res.data.items
-          return null
+          {
+            return {
+              items:res.data.items,
+              totalItems:res.data.totalItems
+            }
+          }
+          return {
+            items:[],
+              totalItems:1
+          }
         } catch (error) {
           console.error('Error fetching products:', error);
+        }finally{
+          loading.openLoading(false)
         }
       };
     return{
