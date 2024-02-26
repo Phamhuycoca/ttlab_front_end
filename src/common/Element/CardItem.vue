@@ -5,7 +5,8 @@
                 <v-col cols="12" sm="12" lg="3" v-for="(item, index) in filteredItems" :key="index"
                     style="display: flex;justify-content: center;" class="mt-4 mb-4">
                     <v-card variant="flat" hover min-height="472px" width="259px">
-                        <v-img cover class="mx-auto" width="226" height="224" :src="item.image"></v-img>
+                        <v-img cover class="mx-auto mt-2" style="border-radius: 4px;" width="227" height="224"
+                            :src="item.image"></v-img>
                         <v-card-text style="height: 74px;">
                             {{ item.title }}
                         </v-card-text>
@@ -56,7 +57,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, reactive, defineProps, watch, computed } from 'vue'
 const items = reactive([
     {
