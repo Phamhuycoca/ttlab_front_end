@@ -28,8 +28,8 @@
                 <v-img src="../assets/icon/Toggle On.png" height="30" width="30" class="child-icon" />
                 <span>Darkmode avaiable</span>
                 <p>
-                    Our UI Kit support darkmode
-                    Chage your design to dark mode with one click
+                    Our UI Kit support dark
+                    mode Chage your design to dark mode with one click
                 </p>
             </div>
             <div class="child">
@@ -86,9 +86,11 @@
 }
 
 .child {
+
     max-width: 493px;
     margin: 0.8%;
-    max-height: 197.87px;
+    /* max-height: 197.87px; */
+    max-height: 170px;
     background-color: #FFFFFF;
     border-radius: 16px;
 }
@@ -98,7 +100,7 @@
 }
 
 .child-icon {
-    font-size: 30px;
+    font-size: 24.03px;
     margin: 30px 0 20px 30px;
 }
 

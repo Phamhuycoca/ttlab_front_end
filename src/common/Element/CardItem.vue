@@ -1,59 +1,59 @@
 <template>
     <div>
-        <v-card>
-            <v-row>
-                <v-col cols="12" sm="12" lg="3" v-for="(item, index) in filteredItems" :key="index"
-                    style="display: flex;justify-content: center;" class="mt-4 mb-4">
-                    <v-card variant="flat" hover min-height="472px" width="259px">
-                        <v-img cover class="mx-auto mt-2" style="border-radius: 4px;" width="227" height="224"
-                            :src="item.image"></v-img>
-                        <v-card-text style="height: 74px;">
-                            {{ item.title }}
-                        </v-card-text>
-                        <v-card-item>
-                            <div style="display: flex;justify-content: space-between;">
-                                <p class="font-weight-black" style="font-size:24px;">
-                                    ${{ item.price }}
-                                </p>
-                                <div v-if="item.status === 0"
-                                    style="width: 70px;height: 24px;background-color:#ECF7ED;text-align: center;margin-top: 5px;margin-right: 7px;">
-                                    <span style="width: 50px; height: 16px;font-size: 12px;color: #37833B;">
-                                        50% OFF
-                                    </span>
-                                </div>
-                                <div v-if="item.status === 1"
-                                    style="width: 70px;height: 24px;background-color:#FDEDF2;text-align: center;margin-top: 5px;margin-right: 7px;">
-                                    <span style="width: 50px; height: 16px;font-size: 12px;color: #C23564;">
-                                        Cool deal!
-                                    </span>
-                                </div>
+        <v-row style="margin-left: -60px;margin-right: -62px;">
+            <v-col cols="12" sm="12" lg="3" v-for="(item, index) in filteredItems" :key="index"
+                style="display: flex;justify-content: center;" class="mt-4 mb-4">
+                <v-card variant="flat" hover min-height="472px" width="258px" style="border-radius: 4px;">
+                    <v-img cover class="mx-auto" style="border-radius: 4px; top: 16px;" width="226" height="224"
+                        :src="item.image"></v-img>
+                    <v-card-text style="height: 74px;width: 227px;line-height: 24px;font-family: 'Inter', sans-serif;"
+                        class="mt-2">
+                        {{ item.title }}
+                    </v-card-text>
+                    <v-card-item>
+                        <div style="display: flex;justify-content: space-between;">
+                            <p class="font-weight-black text-truncate" style="font-size:24px;">
+                                ${{ item.price }}
+                            </p>
+                            <div v-if="item.status === 0"
+                                style="width: 70px;height: 24px;background-color:#ECF7ED;text-align: center;margin-top: 5px;border-radius: 4px;">
+                                <span style="width: 50px; height: 16px;font-size: 12px;color: #37833B;">
+                                    50% OFF
+                                </span>
                             </div>
-                        </v-card-item>
-                        <v-card-text style="height: 41px;font-size: 14px;">
-                            {{ item.reviews }}
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-row style="margin-top: 5px;">
-                                <v-col class="ml-2 mt-2" cols="5" style="display: flex;">
-                                    <v-icon color="#FB8200" size="x-small">mdi mdi-star</v-icon>
-                                    <v-icon color="#FB8200" size="x-small">mdi mdi-star</v-icon>
-                                    <v-icon color="#FB8200" size="x-small">mdi mdi-star</v-icon>
-                                    <v-icon color="#FB8200" size="x-small">mdi mdi-star</v-icon>
-                                    <v-icon color="#FB8200" v-if="item.feedback == 5" size="x-small">mdi mdi-star</v-icon>
-                                    <v-icon color="#FB8200" v-if="item.feedback < 5 && item.feedback > 4" size="x-small">mdi
-                                        mdi-star-half</v-icon>
-                                    <span style="font-size: 12px;">{{ item.feedback }}</span>
-                                </v-col>
-                                <v-col cols="6" class="text-right">
-                                    <v-btn prepend-icon="mdi-heart-outline" variant="outlined" class="text-capitalize"
-                                        size="small" height="32" width="88" color="primary">Watch</v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-card-actions>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-card>
+                            <div v-if="item.status === 1"
+                                style="width: 70px;height: 24px;background-color:#FDEDF2;text-align: center;margin-top: 5px;border-radius: 4px;">
+                                <span style="width: 50px; height: 16px;font-size: 12px;color: #C23564;">
+                                    Cool deal!
+                                </span>
+                            </div>
+                        </div>
+                    </v-card-item>
+                    <v-card-text
+                        style="height: 43px;font-size: 14px;line-height: 22px;font-weight: 400;font-family: 'Roboto', sans-serif;color: #787885;">
+                        {{ item.reviews }}
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-row style="margin-top: 5px;">
+                            <v-col class="ml-2 mt-2" cols="5" style="display: flex;">
+                                <v-icon color="#FB8200" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon color="#FB8200" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon color="#FB8200" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon color="#FB8200" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon color="#FB8200" v-if="item.feedback == 5" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon color="#FB8200" v-if="item.feedback < 5 && item.feedback > 4" size="x-small">mdi
+                                    mdi-star-half</v-icon>
+                                <span style="font-size: 12px;">{{ item.feedback }}</span>
+                            </v-col>
+                            <v-col cols="6" class="text-right" style="margin-left: 7px;">
+                                <v-btn prepend-icon="mdi-heart-outline" variant="outlined" class="text-capitalize"
+                                    size="small" height="32" width="88" color="primary">Watch</v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -70,7 +70,7 @@ const items = reactive([
     },
     {
         image: "https://down-vn.img.susercontent.com/file/11d024f343ffb4714c4d4bed0b11fa40",
-        title: "Giày nam.",
+        title: "Quần áo nam mùa đông không lạnh",
         price: "13.95",
         reviews: "1258 bids, 359 watchers $5.95 for shipping",
         feedback: "4.56",

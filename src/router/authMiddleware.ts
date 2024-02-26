@@ -16,7 +16,6 @@ export default async (
     const tokenExpiredAt = localStorageAuthService.getAccessTokenExpiredAt();
     const isExpired = dayjs().isAfter(dayjs(tokenExpiredAt), 'second');
     const isExpiredRefresh=dayjs().isAfter(dayjs(localStorageAuthService.getRefeshTokenExpiredAt()),'second')
-    console.log('isExpiredRefresh',localStorageAuthService.getRefeshTokenExpiredAt());
     const RoleRouter=to?.meta?.role || Role.USER
     const IS_AUTHENTICATED = tokenExpiredAt && !isExpired && hasToken;
   if(to.name === PageName.LOGIN_PAGE)
@@ -28,9 +27,10 @@ export default async (
     return next()
   }
   if (!IS_AUTHENTICATED && to.name !== PageName.LOGIN_PAGE && !IS_PUBLIC) {
-    sessionStorage.setItem('redirect', to.fullPath);
+    // sessionStorage.setItem('redirect', to.fullPath);
     if(isExpiredRefresh)
     {
+      showWarningsNotification("Vui lòng đăng nhập lại")
       return next({ name: PageName.LOGIN_PAGE });
     }
     else

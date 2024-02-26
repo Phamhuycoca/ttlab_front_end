@@ -1,65 +1,70 @@
 <template>
     <div>
-        <div class="py-6 px-6">
-            <v-row>
-                <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 180px;!important">
-                    <v-row>
-                        <v-select class="ma-2" label="SORT BY" :items="selectBy" v-model="selectedValue" item-value="value"
-                            item-title="text" density="compact" variant="outlined"></v-select>
-                    </v-row>
-                </v-col>
-                <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 170px;!important">
-                    <v-row>
-                        <v-select class="ma-2" label="Condition" :items="selectStatus" v-model="status" item-value="value"
-                            item-title="text" density="compact" variant="outlined"></v-select>
-                    </v-row>
-                </v-col>
-                <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 200px;!important">
-                    <v-row>
-                        <v-select class="ma-2" label="Delivery options" :items="selectPrice" v-model="price"
-                            item-value="value" item-title="text" density="compact" variant="outlined"></v-select>
-                    </v-row>
-                </v-col>
-                <v-spacer></v-spacer>
+        <v-card>
+            <div class="py-6 px-6">
+                <v-row>
+                    <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 180px;!important">
+                        <v-row>
+                            <v-select class="ma-2" label="SORT BY" :items="selectBy" v-model="selectedValue"
+                                item-value="value" item-title="text" density="compact" variant="outlined"></v-select>
+                        </v-row>
+                    </v-col>
+                    <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 170px;!important">
+                        <v-row>
+                            <v-select class="ma-2" label="Condition" :items="selectStatus" v-model="status"
+                                item-value="value" item-title="text" density="compact" variant="outlined"></v-select>
+                        </v-row>
+                    </v-col>
+                    <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 200px;!important">
+                        <v-row>
+                            <v-select class="ma-2" label="Delivery options" :items="selectPrice" v-model="price"
+                                item-value="value" item-title="text" density="compact" variant="outlined"></v-select>
+                        </v-row>
+                    </v-col>
+                    <v-spacer></v-spacer>
+                    <v-col cols="12" sm="12" md="8" lg="6">
+                        <v-row>
+                            <v-spacer></v-spacer>
+                            <v-btn class="text-capitalize font-weight-regular mt-2" variant="text" size="large"
+                                style="background-color: #EBF2FF;">Show
+                                all</v-btn>
+                            <v-btn class="text-capitalize font-weight-regular mt-2" elevation="2" size="large"
+                                style="color: #2264D1;">Auction</v-btn>
+                            <v-btn class="text-capitalize font-weight-regular mt-2 mr-4" variant="text" size="large"
+                                style="background-color: #EBF2FF;">But
+                                now</v-btn>
+                            <v-btn class="mt-2 ml-4 text-disabled" variant="text" size="large"
+                                style="background-color: #EBF2FF;">
+                                <v-icon>mdi-menu</v-icon>
+                            </v-btn>
+                            <v-btn class="mt-2" size="large">
+                                <v-icon color="#2264D1">mdi-microsoft</v-icon>
+                            </v-btn>
+                        </v-row>
+                    </v-col>
+                </v-row>
+            </div>
 
-
-
-                <v-col cols="12" sm="12" md="8" lg="6">
-                    <v-row>
-                        <v-spacer></v-spacer>
-                        <v-btn class="text-capitalize font-weight-regular mt-2" variant="text" size="large"
-                            style="background-color: #EBF2FF;">Show
-                            all</v-btn>
-                        <v-btn class="text-capitalize font-weight-regular mt-2" elevation="2" size="large"
-                            style="color: #2264D1;">Auction</v-btn>
-                        <v-btn class="text-capitalize font-weight-regular mt-2 mr-4" variant="text" size="large"
-                            style="background-color: #EBF2FF;">But
-                            now</v-btn>
-                        <v-btn class="mt-2 ml-4 text-disabled" variant="text" size="large"
-                            style="background-color: #EBF2FF;">
-                            <v-icon>mdi-menu</v-icon>
-                        </v-btn>
-                        <v-btn class="mt-2" size="large">
-                            <v-icon color="#2264D1">mdi-microsoft-windows</v-icon>
-                        </v-btn>
-                    </v-row>
-                </v-col>
-            </v-row>
-        </div>
-
-        <div>
-            <v-row class=" ml-1">
-                <h3 class="ma-5 font-weight-regular">Releted</h3>
-                <v-chip-group v-for="(chip, index) in chips" :key="index">
-                    <v-chip class="ma-2" size="x-large">{{ chip }}</v-chip>
-                </v-chip-group>
-            </v-row>
-        </div>
-
-        <div class="ma-4">
-            <CardItem :selectedValue="selectedValue" :status="status" :price="price" />
-        </div>
-        <div class="ml-4 mr-4 mt-10 mb-10">
+            <div>
+                <v-row class=" ml-1">
+                    <h3 class="ma-4"
+                        style="font-family: 'Inter', sans-serif;font-weight: 500;line-height: 20.02px;font-size: 14px;color: #19191D;!important">
+                        Releted
+                    </h3>
+                    <v-chip-group v-for="(chip, index) in chips" :key="index">
+                        <v-chip>
+                            <div style="font-size: 14px;font-family: 'Inter', sans-serif;color: #19191D;">
+                                {{ chip }}
+                            </div>
+                        </v-chip>
+                    </v-chip-group>
+                </v-row>
+            </div>
+            <div>
+                <CardItem :selectedValue="selectedValue" :status="status" :price="price" />
+            </div>
+        </v-card>
+        <div class="mt-10 mb-10">
             <Footer />
         </div>
     </div>

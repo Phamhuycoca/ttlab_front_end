@@ -75,11 +75,11 @@
                         </v-col>
                     </v-row>
                     <v-row>
-                        <v-col lg="8" md="4" sm="1">
+                        <v-col lg="8" md="4" sm="12">
                             <v-row>
                                 <p class="ml-6 opacity">Showing</p>
-                                <v-col sm="1" md="1" lg="4" class="d-flex">
-                                    <v-select v-model="seletedValue" density="compact" style="max-width: 83px!important;"
+                                <v-col sm="12" md="1" lg="4" class="d-flex">
+                                    <v-select v-model="seletedValue" density="compact" style="max-width: 28%!important;"
                                         :items="['10', '20', '40', '30', '50']" variant="outlined"></v-select>
                                     <p class="opacity mt-2 ml-1">of {{ total }}</p>
                                 </v-col>
@@ -144,16 +144,19 @@ const loadData = async () => {
 
 };
 const search = ref('');
-watch(search, (newval) => {
-    DEFAULT_COMMON_LIST_QUERY.keyword = newval
-    if (newval != "")
-        return
-    DEFAULT_COMMON_LIST_QUERY.page = 1
-    searchData()
+watch(search, (newval, oldval) => {
+    // DEFAULT_COMMON_LIST_QUERY.keyword = newval
+    if (newval == '')
+        return loadData();
+    // DEFAULT_COMMON_LIST_QUERY.page = 1
+    // searchData()
+    // alert(newval)
 })
 const searchData = async () => {
+    DEFAULT_COMMON_LIST_QUERY.keyword = search.value;
     const data = await searchUsers();
     users.value = data?.items;
+    total.value = data?.totalItems;
     lengthPage.value = Math.ceil(data?.totalItems / seletedValue.value);
 }
 const Remove = async () => {

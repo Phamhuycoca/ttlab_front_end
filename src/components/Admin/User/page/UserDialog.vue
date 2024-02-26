@@ -166,7 +166,6 @@ const createNewUser = handleSubmit(async values => {
             formData.append('email', values.email);
             formData.append('phone', values.phone);
             formData.append('file', imageFile.value);
-            formData.append('id', id.value);
             const res = await userServiceApi.updateUser(id.value, formData);
             if (res.success) {
                 showSuccessNotification(res.message)

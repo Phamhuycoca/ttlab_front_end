@@ -41,8 +41,8 @@ export const useUser=()=>{
             }
           }
           return {
-            items:[],
-              totalItems:1
+              items:[],
+              totalItems:0
           }
         } catch (error) {
           console.error('Error fetching products:', error);
