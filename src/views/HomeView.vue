@@ -4,8 +4,8 @@
             <v-row>
                 <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 180px;!important">
                     <v-row>
-                        <v-select class="ma-2" label="SORT BY" :items="selectBy" v-model="selectedValue" density="compact"
-                            variant="outlined"></v-select>
+                        <v-select class="ma-2" label="SORT BY" :items="selectBy" v-model="selectedValue" item-value="value"
+                            item-title="text" density="compact" variant="outlined"></v-select>
                     </v-row>
                 </v-col>
                 <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 170px;!important">
@@ -17,7 +17,7 @@
                 <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 200px;!important">
                     <v-row>
                         <v-select class="ma-2" label="Delivery options" :items="selectPrice" v-model="price"
-                            density="compact" variant="outlined"></v-select>
+                            item-value="value" item-title="text" density="compact" variant="outlined"></v-select>
                     </v-row>
                 </v-col>
                 <v-spacer></v-spacer>
@@ -70,13 +70,24 @@ import { reactive, ref, watch } from "vue"
 import CardItem from '../common/Element/CardItem.vue'
 import Footer from "../components/Page/Footer.vue";
 const chips = reactive(['worldwide shipping', 'under $50', 'kitten', 'plastic plugs', 'pucker shoes', 'vintage typewriter'])
-const selectBy = reactive(['Tất cả', 'Giày', 'Quần', 'Áo'])
+const selectBy = reactive([
+    { text: 'Tất cả', value: '' },
+    { text: 'Giày', value: 'Giày' },
+    { text: 'Quần', value: 'Quần' },
+    { text: 'Áo', value: 'Áo' },
+    // 'Tất cả', 'Giày', 'Quần', 'Áo'
+])
 const selectStatus = reactive([
     { text: 'Tất cả', value: '' },
     { text: 'Giảm 50%', value: 0 },
     { text: 'Cool deal', value: 1 },
 ])
-const selectPrice = reactive(['Tất cả', 'Từ thấp đến cao', 'Từ cao đến thấp']);
+const selectPrice = reactive([
+    { text: 'Tất cả', value: '' },
+    { text: 'Từ thấp đến cao', value: 'Từ thấp đến cao' },
+    { text: 'Từ cao đến thấp', value: 'Từ cao đến thấp' },
+    // 'Tất cả', 'Từ thấp đến cao', 'Từ cao đến thấp'
+]);
 const selectedValue = ref('')
 const status = ref('');
 const price = ref('');

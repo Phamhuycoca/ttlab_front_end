@@ -25,9 +25,9 @@
                     <v-list-item prepend-icon="mdi-account-group" title="User" value="User" to='user'></v-list-item>
                 </v-list>
             </v-navigation-drawer>
-            <v-app-bar class="px-4" color="rgb(247, 247, 247)" :elevation="0" rounded="0">
-                <h3 class="title ml-4">
-                    {{ this.$router.currentRoute.value.name === "product" ? "Quản lý sản phẩm" : "Quản lý người dùng" }}
+            <v-app-bar class="px-4" style="background-color: #FAFAFA;" :elevation="0" rounded="0">
+                <h3 class="title ml-4" style="font-size: 24px;">
+                    {{ this.$router.currentRoute.value.name === "product" ? "Danh sách sản phẩm" : "Danh sách người dùng" }}
                 </h3>
                 <v-spacer></v-spacer>
                 <v-btn>
