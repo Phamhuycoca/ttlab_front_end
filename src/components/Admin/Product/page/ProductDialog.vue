@@ -1,7 +1,7 @@
 
 <template>
     <v-dialog max-width="500px" v-model="dialog">
-        <v-card>
+        <v-card style="border-radius:10px;">
             <v-card-title style="font-weight: bold;">
                 <h4>{{ props.currentValue === '' ? 'Tạo mới sản phẩm' : 'Chỉnh sửa sản phẩm' }}</h4>
             </v-card-title>
@@ -25,7 +25,7 @@
                             <span class="ml-1" style="color: blue;">*</span>
                         </div>
                         <v-text-field style="background-color: white;" label="Nhập giá sản phẩm" density="compact"
-                            single-line hide-details variant="outlined" v-model="price" type="number"></v-text-field>
+                            single-line hide-details variant="outlined" v-model="price"></v-text-field>
                         <div v-show="errors.price" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
                                 errors.price
@@ -37,7 +37,7 @@
                             <span class="ml-1" style="color: blue;">*</span>
                         </div>
                         <v-text-field style="background-color: white;" label="Nhập số lượng sản phẩm" density="compact"
-                            single-line hide-details variant="outlined" v-model="quantity" type="number"></v-text-field>
+                            single-line hide-details variant="outlined" v-model="quantity"></v-text-field>
                         <div v-show="errors.quantity" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
                                 errors.quantity
@@ -65,9 +65,9 @@
             </v-container>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="handleClose" text="Hủy" style="border: 1px solid #ccc;" width="70"></v-btn>
-                <v-btn :text="props.currentValue === '' ? 'Tạo mới' : 'Chỉnh sửa'" @click="createProduct" color="white"
-                    class="mr-2" style="background-color: #0F60FF;" width="110"></v-btn>
+                <v-btn rounded="lg" @click="handleClose" text="Hủy" style="border: 1px solid #ccc;" width="70"></v-btn>
+                <v-btn rounded="lg" :text="props.currentValue === '' ? 'Tạo mới' : 'Chỉnh sửa'" @click="createProduct"
+                    color="white" class="mr-2" style="background-color: #0F60FF;" width="110"></v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -88,8 +88,17 @@ const createValidationSchema = () => {
     if (props.currentValue === '') {
         return yup.object({
             name: yup.string().required('Vui lòng nhập tên sản phẩm'),
-            price: yup.string().required('Vui lòng nhập giá'),
-            quantity: yup.string().required('Vui lòng nhập số lượng'),
+            price: yup.number()
+                .required('Không được bỏ trống')
+                .min(0, 'Giá không được nhỏ hơn 0')
+                .typeError('Giá phải là một số')
+                .max(100000000, 'Giá phải dưới hơn 100 triệu'),
+            quantity: yup.number()
+                .required('Không được bỏ trống')
+                .integer('Số lượng phải là một số nguyên')
+                .min(0, 'Số lượng không được nhỏ hơn 0')
+                .typeError('Số lượng phải là một số')
+                .max(1000000, 'Số lượng phải nhỏ hơn 1 triệu'),
             file: yup.string().required('Vui lòng nhập ảnh sản phẩm'),
         });
     } else {

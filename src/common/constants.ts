@@ -68,6 +68,7 @@ export enum DATE_TIME_FORMAT {
   MMMM_YYYY = 'MMMM, YYYY',
 }
 
+
 export const FORM_VALIDATION = {
   textMinLength: 3,
   textMaxLength: 255,

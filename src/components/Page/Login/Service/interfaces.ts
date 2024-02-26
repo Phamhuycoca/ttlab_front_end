@@ -9,11 +9,13 @@ export type IBodyLogin = {
 };
 
 export type ILoginResponse = {
+ data:{
   accessToken: string;
   expiresIn: number;
   refresh_token: string;
   refresh_expiresIn:number;
   profile:IUser;
+ }
 };
 export interface IUserActiveAccountBody {
   code: string;

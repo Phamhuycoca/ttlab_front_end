@@ -1,10 +1,11 @@
 import localStorageAuthService from '@/common/storages/authStorage';
 import axios from 'axios';
 import router from '@/router';
-import { showWarningsNotification } from '@/common/helpers';
+import { showWarningsNotification, showErrorNotification } from '@/common/helpers';
 import { HttpStatus, PageName } from '@/common/constants';
 
 export const logout = (redirectToLogin = true) => {
+  alert('refresh_token 1');
   localStorageAuthService.resetAll();
   const currentPage = router.currentRoute;
   if (redirectToLogin && currentPage.value.name !== PageName.LOGIN_PAGE) {
@@ -18,7 +19,7 @@ export const logout = (redirectToLogin = true) => {
 
 export const sendRefreshToken = async () => {
   let response;
-  alert('refresh_token');
+  // alert('refresh_token 2');
   try {
     const API_URL = process.env.VUE_APP_API_URL;
     const formData=new FormData()
@@ -35,14 +36,19 @@ export const sendRefreshToken = async () => {
     );
     if (response?.status === HttpStatus.CREATA_AT) {
       localStorageAuthService.resetAll();
-      localStorageAuthService.setAccessToken(response.data?.data.accessToken);
-      localStorageAuthService.setAccessTokenExpiredAt(response.data.data?.expiresIn);
-      localStorageAuthService.setUserRole(response.data.data.profile.role);
+      localStorageAuthService.setAccessToken(response.data?.data.data.accessToken);
+      localStorageAuthService.setAccessTokenExpiredAt(response.data?.data.data.expiresIn);
+      localStorageAuthService.setRefeshToken(response.data?.data.data.refresh_token);
+      localStorageAuthService.setRefeshTokenExpiredAt(response.data?.data.data.refresh_expiresIn);
+      localStorageAuthService.setUserRole(response.data?.data.data.profile.role);
       return;
     }
     logout(true);
     return;
   } catch (error) {
+    showErrorNotification('Vui lòng đăng nhập lại');
+    console.log('utils');
+    console.log(error);
     logout(true);
     return;
   }

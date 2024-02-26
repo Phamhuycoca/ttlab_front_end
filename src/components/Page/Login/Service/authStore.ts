@@ -12,12 +12,13 @@ export const useAuthStore = defineStore('authStore', () => {
 
   async function login(body: IBodyLogin) {
     const res = await authApi.login(body);
+    // console.log(res.data.data.profile.role);
     if (res.success) {
-      localStorageAuthService.setAccessToken(res.data?.accessToken);
-      localStorageAuthService.setAccessTokenExpiredAt(res.data?.expiresIn);
-      localStorageAuthService.setRefeshToken(res.data?.refresh_token);
-      localStorageAuthService.setRefeshTokenExpiredAt(res.data?.refresh_expiresIn);
-      localStorageAuthService.setUserRole(res.data.profile.role);
+      localStorageAuthService.setAccessToken(res.data?.data.accessToken);
+      localStorageAuthService.setAccessTokenExpiredAt(res.data?.data.expiresIn);
+      localStorageAuthService.setRefeshToken(res.data?.data.refresh_token);
+      localStorageAuthService.setRefeshTokenExpiredAt(res.data?.data.refresh_expiresIn);
+      localStorageAuthService.setUserRole(res.data.data.profile.role);
     } 
     return res;
   }

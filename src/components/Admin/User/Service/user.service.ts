@@ -20,7 +20,7 @@ export const useUser=()=>{
           }
           return {
             items:[],
-              totalItems:1
+              totalItems:0
           }
         } catch (error) {
           console.error('Error fetching user:', error);

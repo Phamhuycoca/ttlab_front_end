@@ -1,8 +1,7 @@
 import { PageName, Role } from "@/common/constants";
-import { showWarningsNotification } from "@/common/helpers";
+import { showErrorNotification, showWarningsNotification } from "@/common/helpers";
 import localStorageAuthService from "@/common/storages/authStorage";
 import dayjs from "@/plugins/dayjs";
-import { get } from "lodash";
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 export default async (
   to: RouteLocationNormalized,
@@ -16,10 +15,10 @@ export default async (
     const hasToken = localStorageAuthService.getAccessToken() ? true : false;
     const tokenExpiredAt = localStorageAuthService.getAccessTokenExpiredAt();
     const isExpired = dayjs().isAfter(dayjs(tokenExpiredAt), 'second');
-    const isExpiredRefresh=dayjs().isAfter(dayjs(localStorageAuthService.getAccessTokenExpiredAt()),'second')
+    const isExpiredRefresh=dayjs().isAfter(dayjs(localStorageAuthService.getRefeshTokenExpiredAt()),'second')
+    console.log('isExpiredRefresh',localStorageAuthService.getRefeshTokenExpiredAt());
     const RoleRouter=to?.meta?.role || Role.USER
     const IS_AUTHENTICATED = tokenExpiredAt && !isExpired && hasToken;
-
   if(to.name === PageName.LOGIN_PAGE)
   {
     localStorageAuthService.resetAll()
@@ -44,7 +43,8 @@ export default async (
       if (role===RoleRouter) {
         return next();
       } else {
-        return next({ name: PageName.NOT_FOUND_PAGE });
+        showErrorNotification("Bạn không có quyền");
+        return next({ name: PageName.LOGIN_PAGE });
       }
     }
   }

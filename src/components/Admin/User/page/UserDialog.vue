@@ -45,8 +45,7 @@
                     <v-col cols="12" style="font-size: 13px;">
                         <p>Số điện thoại</p>
                         <v-text-field style="background-color: white;" label="Nhập số điện thoại" density="compact"
-                            v-model="phone" v-bind="phoneAttrs" type="number" single-line hide-details
-                            variant="outlined"></v-text-field>
+                            v-model="phone" v-bind="phoneAttrs" single-line hide-details variant="outlined"></v-text-field>
                         <div v-show="errors.phone" class="mt-2" style="color: red;">{{
                             errors.phone
                         }}</div>
@@ -93,10 +92,27 @@ const handleImageChange = (event) => {
 
 const { errors, handleSubmit, resetForm, defineField } = useForm({
     validationSchema: yup.object({
-        name: yup.string().required('Vui lòng nhập tên người dùng'),
-        email: yup.string().email('Email không hợp lệ').required('Vui lòng nhập email'),
-        birthday: yup.string().required('Vui lòng nhập ngày sinh'),
-        phone: yup.string().matches(regexPhoneNumber, 'Số điện thoại không hợp lệ'),
+        name: yup.string().required('Vui lòng nhập tên người dùng').matches(
+            /^[a-zA-ZÀ-Ỹà-ỹ ]*$/,
+            'Tên không hợp lệ'
+        ),
+        email: yup.string().required('Vui lòng nhập email').matches(
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            'Email không hợp lệ'
+        ),
+        birthday: yup.string().required('Vui lòng nhập ngày sinh').matches(
+            /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
+            'Ngày sinh không hợp lệ. Vui lòng nhập theo định dạng YYYY-MM-DD.'
+        )
+            .test('not-in-future', 'Ngày sinh không được qua ngày hiện tại', function (value) {
+                const birthdayDate = new Date(value);
+                const currentDate = new Date();
+                return birthdayDate <= currentDate;
+            }),
+        phone: yup.string().matches(
+            /^0\d{9,10}$/,
+            'Số điện thoại không hợp lệ. Số điện thoại phải có 10 chữ số.'
+        )
     }),
 });
 const [name, nameAttrs] = defineField('name');

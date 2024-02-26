@@ -8,21 +8,22 @@
             </v-col>
             <v-spacer></v-spacer>
             <v-col sm="1" md="3" lg="4" class="text-right">
-                <v-btn color="#0F60FF" prepend-icon="mdi-plus" min-height="40" min-width="122"
-                    @click="dialog = true, currentValue = ''">Tạo
+                <v-btn color="#0F60FF" prepend-icon="mdi-plus" class="text-capitalize" min-height="40" min-width="122"
+                    rounded="lg" @click="dialog = true, currentValue = ''">Tạo
                     mới</v-btn>
             </v-col>
         </v-row>
-        <v-row>
+        <v-row style="margin-top: -2%;">
             <v-col cols="12">
-                <v-card elevation="3" class="rounded-lg mb-4" min-height="726">
+                <v-card elevation="3" class="rounded-lg mb-4">
                     <v-row>
                         <v-col cols="12">
                             <v-card variant="text">
                                 <v-table density="compact">
                                     <thead style="height: 47px;">
                                         <tr>
-                                            <th class=" text-left text-disabled text-uppercase text-medium-emphasi">
+                                            <th class="text-center text-disabled text-uppercase text-medium-emphasi"
+                                                style="width: 200px;">
                                                 Tên sản phẩm
                                             </th>
                                             <th class="text-left text-disabled text-uppercase text-medium-emphasi">
@@ -44,7 +45,8 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(item, i) in products" :key="i" style="height: 58px;">
-                                            <td>{{ item.name }}</td>
+                                            <td class="text-truncate text-center" style="max-width: 200px;">{{ item.name }}
+                                            </td>
                                             <td>${{ item.price }}</td>
                                             <td>{{ item.quantity }}</td>
                                             <td class="text-truncate font-weight-medium" style="max-width: 150px;">
@@ -71,7 +73,7 @@
                             <v-row>
                                 <p class="mt-5 ml-6 opacity">Showing</p>
                                 <v-col sm="1" md="1" lg="3" class="d-flex">
-                                    <v-select v-model="seletedValue" density="compact" style="max-width: 81px!important;"
+                                    <v-select v-model="seletedValue" density="compact" style="max-width: 83px!important;"
                                         :items="['10', '20', '25', '30', '50']" variant="outlined"></v-select>
                                     <p class="opacity mt-2 ml-1">of {{ total }}</p>
                                 </v-col>

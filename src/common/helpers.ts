@@ -47,7 +47,7 @@ export function showWarningsNotification(message: string) {
 }
 
 
-export function maskPhone(value: string, pattern = '### #### ###') {
+export function maskPhone(value: string, pattern = '###-####-###') {
   let i = 0;
   return pattern.replace(/#/g, (_) => value[i++]);
 }
@@ -165,3 +165,8 @@ export const scrollToIdElement = (id: string) => {
   }
 };
 
+export function formatPhoneNumber(phoneNumber: string): string {
+  const cleaned: string = ('' + phoneNumber).replace(/\D/g, '');
+  const formatted: string = cleaned.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
+  return formatted;
+}

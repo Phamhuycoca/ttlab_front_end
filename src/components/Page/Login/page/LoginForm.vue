@@ -12,11 +12,11 @@ const terms = ref(false);
 import image from '../../../../assets/ttlab-logo.svg';
 import router from '../../../../router';
 import localStorageAuthService from '../../../../common/storages/authStorage';
-import { Role } from '../../../../common/constants';
+import { Role, FORM_VALIDATION, Regex } from '../../../../common/constants';
 const { errors, handleSubmit, validate, defineField } = useForm({
     validationSchema: yup.object({
         email: yup.string().email('Email không đúng định dạng').required('Vui lòng nhập email'),
-        password: yup.string().min(6, 'Mật khẩu phải trên 6 kí tự').required('Mật khẩu không được để trống'),
+        password: yup.string().required('Vui lòng nhập mật khẩu').min(FORM_VALIDATION.passwordMinLength, 'Mật khẩu tối thiểu 8 kí tự').max(FORM_VALIDATION.textMaxLength, 'Mật khẩu không quá 30 kí tự').matches(Regex.PASSWORD, 'Mật khẩu phải có ít nhất 1 số hoặc chữ'),
     }),
 });
 const onSubmit = handleSubmit(async values => {
