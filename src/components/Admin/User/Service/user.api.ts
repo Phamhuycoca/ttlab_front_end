@@ -13,16 +13,14 @@ class UserApiService extends ApiService {
     console.log(localStorageAuthService.getAccessToken());
     return await this.client.post(`${this.baseUrl}`, formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
-        'Authorization': 'Bearer '+localStorageAuthService.getAccessToken()
+        "Content-Type": "multipart/form-data"
       },
     });
   }
   async updateUser(id:string,formData: FormData): Promise<IBodyResponse<any>> {
     return await this.client.put(`${this.baseUrl}/${id}`, formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
-        'Authorization': 'Bearer '+localStorageAuthService.getAccessToken()
+        "Content-Type": "multipart/form-data"
       },
     });
   }

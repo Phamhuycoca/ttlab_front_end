@@ -1,7 +1,7 @@
 <template>
     <div class="px-8 mt-4">
         <v-row>
-            <v-col sm="12" md="5" lg="3" style="max-width: 316px;!important">
+            <v-col sm="12" md="5" lg="3" style="max-width: 316px;border: 1px;!important">
                 <v-text-field variant="solo" placeholder="Tìm kiếm" @change="searchData()" v-model="search"
                     append-inner-icon="mdi-magnify" density="compact">
                 </v-text-field>
@@ -15,7 +15,7 @@
         </v-row>
         <v-row style="margin-top: -2%;">
             <v-col cols="12">
-                <v-card elevation="3" class="mb-4" style="border-radius: 16px;">
+                <v-card class="mb-4" style="border-radius: 16px;border: 1px;">
                     <v-row>
                         <v-col cols="12">
                             <v-card variant="text">
@@ -79,7 +79,7 @@
                             <v-row>
                                 <p class="ml-6 opacity">Showing</p>
                                 <v-col sm="12" md="1" lg="4" class="d-flex">
-                                    <v-select v-model="seletedValue" density="compact" style="max-width: 28%!important;"
+                                    <v-select v-model="seletedValue" density="compact" style="max-width: 34%!important;"
                                         :items="['10', '20', '40', '30', '50']" variant="outlined"></v-select>
                                     <p class="opacity mt-2 ml-1">of {{ total }}</p>
                                 </v-col>
@@ -124,7 +124,7 @@ watch(seletedValue, (newval) => {
     page.value = 1
     loadData()
 })
-watch(page, (newVal) => {
+watch(page, (newVal, oldval) => {
     DEFAULT_COMMON_LIST_QUERY.page = newVal
     loadData()
 })
@@ -145,18 +145,23 @@ const loadData = async () => {
 };
 const search = ref('');
 watch(search, (newval, oldval) => {
-    // DEFAULT_COMMON_LIST_QUERY.keyword = newval
-    if (newval == '')
-        return loadData();
-    // DEFAULT_COMMON_LIST_QUERY.page = 1
+    if (newval === '' && oldval !== '') {
+        page.value = 1;
+    }
+    // if (newval !== oldval) {
+    //     return loadData();
+    // }
     // searchData()
     // alert(newval)
 })
 const searchData = async () => {
+    // page.value = 1
     DEFAULT_COMMON_LIST_QUERY.keyword = search.value;
+    DEFAULT_COMMON_LIST_QUERY.page = 1
     const data = await searchUsers();
     users.value = data?.items;
     total.value = data?.totalItems;
+    // page.value = 1;
     lengthPage.value = Math.ceil(data?.totalItems / seletedValue.value);
 }
 const Remove = async () => {
@@ -171,6 +176,8 @@ const Remove = async () => {
     dialogremove.value = false;
 }
 onMounted(() => {
+    DEFAULT_COMMON_LIST_QUERY.keyword = '';
+    DEFAULT_COMMON_LIST_QUERY.page = 1;
     loadData();
 });
 

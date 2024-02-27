@@ -55,12 +55,20 @@
                             <p>Avatar</p>
                             <span class="ml-1" style="color: blue;">*</span>
                         </div>
+                        <!-- <v-text-field label="Nhập link ảnh avatar" style="background-color: white;" density="compact"
+                            v-model="file" @change="handleImageChange" v-bind="fileAttrs" single-line hide-details
+                            type="file" clearable variant="outlined"></v-text-field> -->
                         <v-text-field label="Nhập link ảnh avatar" style="background-color: white;" density="compact"
                             v-model="file" @change="handleImageChange" single-line hide-details type="file" clearable
                             variant="outlined"></v-text-field>
-                        <!-- <div v-show="errors.avatar" class="mt-2" style="color: red;">{{
-                            errors.avatar
+
+                        <!-- <div v-show="errors.file" class="mt-2" style="color: red;">{{
+                            errors.file
                         }}</div> -->
+                        <div v-show="props.currentValue === '' && errors.file" class="mt-2" style="color: red;">
+                            {{ props.currentValue === '' ? errors.file : '' }}
+                        </div>
+
                     </v-col>
                 </v-row>
             </v-container>
@@ -86,8 +94,7 @@ import { userServiceApi } from '@/components/Admin/User/Service/user.api';
 import { showSuccessNotification, showErrorNotification } from '../../../../common/helpers';
 
 const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    imageFile.value = file;
+    imageFile.value = event.target.files[0];
 };
 
 const { errors, handleSubmit, resetForm, defineField } = useForm({
@@ -112,7 +119,17 @@ const { errors, handleSubmit, resetForm, defineField } = useForm({
         phone: yup.string().matches(
             /^0\d{9,10}$/,
             'Số điện thoại không hợp lệ. Số điện thoại phải có 10 chữ số.'
-        )
+        ),
+        file: yup
+            .mixed()
+            .test('custom-validation', 'Vui lòng chọn ảnh', function (value) {
+                if (props.currentValue !== '') {
+                    return true;
+                } else {
+                    return value !== undefined && value !== null && value !== '';
+                }
+            })
+
     }),
 });
 const [name, nameAttrs] = defineField('name');
@@ -121,7 +138,7 @@ const [birthday, birthdayAttrs] = defineField('birthday');
 const [avatar, avatarAttrs] = defineField('avatar');
 const [phone, phoneAttrs] = defineField('phone');
 const [id] = defineField('id');
-const [file] = defineField('file');
+const [file, fileAttrs] = defineField('file');
 const isDisabled = computed(() => props.currentValue !== '' ? true : false);
 
 
@@ -129,6 +146,8 @@ watch(() => props.currentValue, (newValue, oldValue) => {
     if (newValue === '') {
         resetForm();
     } else {
+        imageFile.value = '';
+        file.value = '';
         name.value = newValue.name;
         birthday.value = newValue.birthday;
         email.value = newValue.email;
@@ -139,7 +158,7 @@ watch(() => props.currentValue, (newValue, oldValue) => {
 });
 
 const handleClose = () => {
-    resetForm();
+    // resetForm();
     emit('close');
 };
 
@@ -177,7 +196,10 @@ const createNewUser = handleSubmit(async values => {
         console.error('Error creating product:', error);
 
     } finally {
+        resetForm();
         handleClose();
+        imageFile.value = '';
+        file.value = '';
         emit('updateData');
     }
 });

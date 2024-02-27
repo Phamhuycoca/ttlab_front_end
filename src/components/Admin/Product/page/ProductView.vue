@@ -2,8 +2,8 @@
     <div class="px-8 mt-4">
         <v-row>
             <v-col sm="4" md="5" lg="3" style="max-width: 316px;!important">
-                <v-text-field label="Tìm kiếm" @change="searchData()" v-model="search" append-inner-icon="mdi-magnify"
-                    density="compact" variant="solo">
+                <v-text-field variant="solo" placeholder="Tìm kiếm" @change="searchData()" v-model="search"
+                    append-inner-icon="mdi-magnify" density="compact">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
@@ -15,7 +15,7 @@
         </v-row>
         <v-row style="margin-top: -2%;">
             <v-col cols="12">
-                <v-card elevation="3" class="rounded-lg mb-4">
+                <v-card class="mb-4" style="border-radius: 16px; border: 1px;">
                     <v-row>
                         <v-col cols="12">
                             <v-card variant="text">
@@ -115,16 +115,19 @@ const { fetchProducts, searchProducts } = useProduct()
 
 
 const search = ref('');
-watch(search, (newval) => {
-    DEFAULT_COMMON_LIST_QUERY.keyword = newval
-    if (newval != "")
-        return
-    DEFAULT_COMMON_LIST_QUERY.page = 1
-    searchData()
+watch(search, (newval, oldval) => {
+    if (newval === '') {
+        // page.value = 1;
+    }
 })
 const searchData = async () => {
+    DEFAULT_COMMON_LIST_QUERY.keyword = search.value;
+    DEFAULT_COMMON_LIST_QUERY.page = 1
     const data = await searchProducts();
     products.value = data?.items;
+    total.value = data?.totalItems;
+    page.value = 1;
+
     lengthPage.value = Math.ceil(data?.totalItems / seletedValue.value);
 }
 const loadData = async () => {
@@ -155,6 +158,8 @@ const Remove = async () => {
     dialogremove.value = false;
 }
 onMounted(() => {
+    DEFAULT_COMMON_LIST_QUERY.keyword = '';
+    DEFAULT_COMMON_LIST_QUERY.page = 1;
     loadData();
 });
 </script>

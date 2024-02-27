@@ -55,7 +55,7 @@
                         </div>
                         <v-text-field placeholder="Nhập link ảnh sản phẩm" style="background-color: white;"
                             density="compact" @change="handleImageChange" single-line hide-details variant="outlined"
-                            clearable type="file" v-model="file"></v-text-field>
+                            clearable type="file" v-model="file" v-bind="fileAttrs"></v-text-field>
                         <div v-show="errors.file" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
                                 errors.file
@@ -85,29 +85,36 @@ const props = defineProps(['close', 'currentValue']);
 const emit = defineEmits();
 console.log(props.currentValue);
 const createValidationSchema = () => {
-    if (props.currentValue === '') {
-        return yup.object({
-            name: yup.string().required('Vui lòng nhập tên sản phẩm'),
-            price: yup.number()
-                .required('Không được bỏ trống')
-                .min(0, 'Giá không được nhỏ hơn 0')
-                .typeError('Giá phải là một số')
-                .max(100000000, 'Giá phải dưới hơn 100 triệu'),
-            quantity: yup.number()
-                .required('Không được bỏ trống')
-                .integer('Số lượng phải là một số nguyên')
-                .min(0, 'Số lượng không được nhỏ hơn 0')
-                .typeError('Số lượng phải là một số')
-                .max(1000000, 'Số lượng phải nhỏ hơn 1 triệu'),
-            file: yup.string().required('Vui lòng nhập ảnh sản phẩm'),
-        });
-    } else {
-        return yup.object({
-        });
-    }
+    return yup.object({
+        name: yup.string().required('Vui lòng nhập tên sản phẩm'),
+        price: yup.number()
+            .required('Không được bỏ trống')
+            .min(0, 'Giá không được nhỏ hơn 0')
+            .max(100000000, 'Giá phải dưới hơn 100 triệu')
+            .typeError('Giá phải là một số')
+        , quantity: yup.number()
+            .required('Không được bỏ trống')
+            .integer('Số lượng phải là một số nguyên')
+            .min(0, 'Số lượng không được nhỏ hơn 0')
+            .typeError('Số lượng phải là một số')
+            .max(1000000, 'Số lượng phải nhỏ hơn 1 triệu'),
+        file: yup
+            .mixed()
+            .test('custom-validation', 'Vui lòng chọn ảnh', function (value) {
+                if (props.currentValue === '') {
+                    return false;
+                } else {
+                    return true;
+                }
+            })
+    });
+
+
 };
 
-
+function checkWhitespace(str) {
+    return /\s/.test(str);
+}
 const {
     errors,
     handleSubmit,
