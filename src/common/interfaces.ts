@@ -25,6 +25,7 @@ export interface IBodyResponse<T> extends AxiosResponse {
   message: string;
   error: string;
   data: T;
+  statusCode:string;
   errors?: IResponseError<any>[];
 }
 

@@ -25,7 +25,7 @@
                             <span class="ml-1" style="color: blue;">*</span>
                         </div>
                         <v-text-field style="background-color: white;" label="Nhập giá sản phẩm" density="compact"
-                            single-line hide-details variant="outlined" v-model="price"></v-text-field>
+                            single-line hide-details type="number" variant="outlined" v-model="price"></v-text-field>
                         <div v-show="errors.price" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
                                 errors.price
@@ -37,7 +37,7 @@
                             <span class="ml-1" style="color: blue;">*</span>
                         </div>
                         <v-text-field style="background-color: white;" label="Nhập số lượng sản phẩm" density="compact"
-                            single-line hide-details variant="outlined" v-model="quantity"></v-text-field>
+                            single-line hide-details type="number" variant="outlined" v-model="quantity"></v-text-field>
                         <div v-show="errors.quantity" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
                                 errors.quantity
@@ -90,10 +90,7 @@ const emit = defineEmits();
 console.log(props.currentValue);
 const createValidationSchema = () => {
     return yup.object({
-        name: yup.string().required('Vui lòng nhập tên sản phẩm').matches(
-            /^[a-zA-ZÀ-Ỹà-ỹ ]*$/,
-            'Tên không hợp lệ'
-        ),
+        name: yup.string().required('Vui lòng nhập tên sản phẩm'),
         price: yup.number()
             .required('Không được bỏ trống')
             .min(0, 'Giá không được nhỏ hơn 0')
@@ -184,7 +181,14 @@ const createProduct = handleSubmit(async values => {
             if (res.success) {
                 showSuccessNotification(res.message)
             } else {
-                res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
+                showErrorNotification(res.message)
+                // showErrors(res.message)
+                // alert(res.message)
+                // if (res.status === 400) {
+                //     console.log('error creating product');
+                //     // showErrors(res.message)
+                // }
+                // res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
             }
         } else {
             const formData = new FormData();
@@ -198,7 +202,16 @@ const createProduct = handleSubmit(async values => {
             if (res.success) {
                 showSuccessNotification(res.message)
             } else {
-                res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
+                // alert(res.statusCode);
+                // if (res.statusCode == 400) {
+                //     if (res.message.length > 0) {
+                //         showErrors(res.message)
+                //     }
+                showErrorNotification(res.message)
+
+                // }
+                // if(res.status ===)
+                // res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
             }
         }
     } catch (error) {

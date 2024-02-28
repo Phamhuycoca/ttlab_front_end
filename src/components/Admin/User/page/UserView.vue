@@ -94,7 +94,7 @@
                             </v-row>
                         </v-col>
                         <v-spacer class="d-xs-none d-sm-none"></v-spacer>
-                        <v-col lg="4" md="6" sm="3" xs>
+                        <v-col lg="4" md="8" sm="3" xs>
                             <v-pagination v-model="page" active-color="#0F60FF" variant="text" density="compact"
                                 :length="lengthPage"></v-pagination>
                         </v-col>

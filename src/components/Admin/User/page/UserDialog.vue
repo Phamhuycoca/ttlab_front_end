@@ -167,6 +167,13 @@ watch(() => props.currentValue, (newValue, oldValue) => {
         id.value = newValue.id;
     }
 });
+const showErrors = (errors: string[]) => {
+    errors.forEach((message, index) => {
+        setTimeout(() => {
+            showErrorNotification(message);
+        }, index * 1000);
+    });
+};
 
 const handleClose = () => {
     // resetForm();
@@ -187,7 +194,11 @@ const createNewUser = handleSubmit(async values => {
             if (res.success) {
                 showSuccessNotification(res.message)
             } else {
-                res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
+
+                showErrorNotification(res.message)
+
+                // showErrors(res.message)
+                // res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
             }
         } else {
             const formData = new FormData();
@@ -200,7 +211,8 @@ const createNewUser = handleSubmit(async values => {
             if (res.success) {
                 showSuccessNotification(res.message)
             } else {
-                showErrorNotification(res.error)
+                // showErrors(res.message)
+                showErrorNotification(res.message)
             }
         }
     } catch (error) {
