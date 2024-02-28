@@ -25,7 +25,7 @@
         </v-navigation-drawer>
         <v-app-bar class="px-4" style="background-color: #FAFAFA;" :elevation="0" rounded="0">
             <v-icon @click="rail = !rail, drawer = !drawer"
-                class="d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none ml-4">mdi-menu</v-icon>
+                class="d-xs-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none ml-4">mdi-menu</v-icon>
             <h3 class="title ml-4" style="font-size: 24px;">
                 {{ this.$router.currentRoute.value.name === "product" ? "Danh sách sản phẩm" : "Danh sách người dùng" }}
             </h3>
@@ -36,7 +36,9 @@
                 </v-badge>
             </v-btn>
             <v-avatar class="mr-4" id="menu-activator" style="cursor: pointer;">
-                <v-img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
+                <v-img v-if="avatar === null" src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
+                <v-img v-else :src="avatar" alt="John"></v-img>
+
             </v-avatar>
             <v-menu activator="#menu-activator" style="cursor: pointer;" width="200">
                 <v-list>
@@ -55,36 +57,35 @@
     </v-app>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Confirm from '@/common/Element/Confirm.vue';
 import router from '../router';
 import { showSuccessNotification } from '../common/helpers';
 import { useLoadingStore } from '@/store/loading.store';
+import localStorageAuthService from '../common/storages/authStorage';
+import { ref, onMounted } from 'vue';
 
-const loading = useLoadingStore()
+const loading = useLoadingStore();
 
-export default {
-    data() {
-        return {
-            drawer: true,
-            rail: false,
-            dialogremove: false
-
-        };
-    },
-    methods: {
-        Remove() {
-            loading.openLoading(true)
-            setTimeout(() => {
-                router.push('/login')
-            }, 2000)
-            showSuccessNotification('Đăng xuất thành công');
-            loading.openLoading(false)
-        }
-    },
-    components: { Confirm }
+const drawer = ref(true)
+const rail = ref(false)
+const dialogremove = ref(false)
+const avatar = ref('')
+const Remove = async () => {
+    loading.openLoading(true);
+    try {
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        router.push('/login');
+        showSuccessNotification('Đăng xuất thành công');
+    } finally {
+        loading.openLoading(false);
+    }
 }
+onMounted(() => {
+    avatar.value = localStorageAuthService.getAvatar();
+});
 </script>
+
 
 <style scoped>
 @media (min-width: 1200px) {

@@ -19,6 +19,7 @@ export const useAuthStore = defineStore('authStore', () => {
       localStorageAuthService.setRefeshToken(res.data?.data.refresh_token);
       localStorageAuthService.setRefeshTokenExpiredAt(res.data?.data.refresh_expiresIn);
       localStorageAuthService.setUserRole(res.data.data.profile.role);
+      localStorageAuthService.setAvatar(res.data.data.profile.avatar);
     } 
     return res;
   }

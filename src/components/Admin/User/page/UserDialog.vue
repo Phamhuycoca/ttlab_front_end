@@ -46,7 +46,10 @@
                         }}</div>
                     </v-col>
                     <v-col cols="12" style="font-size: 13px;">
-                        <p>Số điện thoại</p>
+                        <div class="d-flex mb-2">
+                            <p>Số điện thoại</p>
+                            <span class="ml-1" style="color: blue;">*</span>
+                        </div>
                         <v-text-field style="background-color: white;" label="Nhập số điện thoại" density="compact"
                             v-model="phone" v-bind="phoneAttrs" single-line hide-details variant="outlined"></v-text-field>
                         <div v-show="errors.phone" class="mt-2" style="color: red;">{{
@@ -120,9 +123,11 @@ const { errors, handleSubmit, resetForm, defineField } = useForm({
                 const currentDate = new Date();
                 return birthdayDate <= currentDate;
             }),
-        phone: yup.string().matches(
-            FORM_VALIDATION.phoneRegExp,
-            'Số điện thoại không hợp lệ')
+        phone: yup.string()
+            .required('Vui lòng nhập số điện thoại')
+            .matches(
+                FORM_VALIDATION.phoneRegExp,
+                'Số điện thoại không hợp lệ')
             .min(10, 'Số điện thoại không dưới 10 số')
             .max(10, 'Số điện thoại không được quá 10 số')
         ,

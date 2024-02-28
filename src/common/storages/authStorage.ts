@@ -13,6 +13,7 @@ const BUFFER_TIME = 60 * 1000; // 60s
     LANGUAGE = 'LANGUAGE',
     ACCESS_TOKEN_EXPIRED_AT = 'ACCESS_TOKEN_EXPIRED_AT',
     REFRESH_TOKEN_EXPIRED_AT = 'REFRESH_TOKEN_EXPIRED_AT',
+    AVATAR='AVATAR'
   }
 class LocalStorageAuthService {
   // ACCESS_TOKEN
@@ -59,6 +60,14 @@ class LocalStorageAuthService {
   }
 
 
+
+
+ setAvatar(avatar: string): void {
+    storage.setLocalStorage(AUTH_SERVICE_KEY.AVATAR, avatar);
+  }
+  getAvatar(): string {
+    return storage.getLocalStorage(AUTH_SERVICE_KEY.AVATAR);
+  }
 
 
   // LANGUAGE
@@ -119,6 +128,7 @@ class LocalStorageAuthService {
     storage.setLocalStorage(AUTH_SERVICE_KEY.REFRESH_TOKEN,'');
     storage.setLocalStorage(AUTH_SERVICE_KEY.REFRESH_TOKEN_EXPIRED_AT,'');
     storage.setLocalStorage(AUTH_SERVICE_KEY.USER, '');
+    storage.setLocalStorage(AUTH_SERVICE_KEY.AVATAR,'');
   }
 }
 

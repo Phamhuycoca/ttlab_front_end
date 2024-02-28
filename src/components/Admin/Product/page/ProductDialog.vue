@@ -90,7 +90,10 @@ const emit = defineEmits();
 console.log(props.currentValue);
 const createValidationSchema = () => {
     return yup.object({
-        name: yup.string().required('Vui lòng nhập tên sản phẩm'),
+        name: yup.string().required('Vui lòng nhập tên sản phẩm').matches(
+            /^[a-zA-ZÀ-Ỹà-ỹ ]*$/,
+            'Tên không hợp lệ'
+        ),
         price: yup.number()
             .required('Không được bỏ trống')
             .min(0, 'Giá không được nhỏ hơn 0')

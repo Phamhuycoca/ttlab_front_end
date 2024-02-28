@@ -44,7 +44,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(item, i) in products" :key="i" style="height: 58px;">
+                                        <tr v-for="(item, i) in products" :key="i" style="height: 58px;"
+                                            v-if="products.length > 0">
                                             <td class="text-truncate text-center" style="max-width: 200px;">{{ item.name }}
                                             </td>
                                             <td>${{ item.price }}</td>
@@ -62,13 +63,20 @@
                                                     class="ma-1">mdi-trash-can-outline</v-icon>
                                             </td>
                                         </tr>
+                                        <tr v-else style="height: 58px;">
+                                            <td colspan="6">
+                                                <p class="text-center text-red">
+                                                    Không có dữ liệu
+                                                </p>
+                                            </td>
+                                        </tr>
                                         <v-divider></v-divider>
                                     </tbody>
                                 </v-table>
                             </v-card>
                         </v-col>
                     </v-row>
-                    <v-row>
+                    <v-row v-if="products.length > 0">
                         <v-col lg="8" md="4" sm="1">
                             <v-row>
                                 <p class="mt-5 ml-6 opacity">Showing</p>

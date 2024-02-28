@@ -1,13 +1,13 @@
 <template>
     <div class="px-8 mt-4">
         <v-row>
-            <v-col sm="12" md="2" lg="3" style="max-width: 316px;border: 1px;!important">
+            <v-col xs sm="3" md="2" lg="3" style="max-width: 316px;border: 1px;!important">
                 <v-text-field variant="solo" placeholder="Tìm kiếm" @change="searchData()" v-model="search"
                     append-inner-icon="mdi-magnify" density="compact">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col sm="2" md="5" lg="4" class="text-right">
+            <v-col xs sm="3" md="2" lg="4" class="text-right">
                 <v-btn color="#0F60FF" prepend-icon="mdi-plus" class="text-capitalize" min-height="40" max-width="122"
                     rounded="lg" @click="dialog = true, currentValue = ''">Tạo
                     mới</v-btn>
@@ -43,7 +43,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(item, i) in users" :key="i" style="height: 58px;">
+                                        <tr v-for="(item, i) in users" :key="i" style="height: 58px;"
+                                            v-if="users.length > 0">
                                             <td>
                                                 <v-img class="mx-auto" :src="item.avatar" width="36" contain height="36" />
                                             </td>
@@ -68,24 +69,32 @@
                                                     @click="dialogremove = true, id = item.id">mdi-trash-can-outline</v-icon>
                                             </td>
                                         </tr>
+                                        <tr v-else style="height: 58px;">
+                                            <td colspan="6">
+                                                <p class="text-center text-red">
+                                                    Không có dữ liệu
+                                                </p>
+                                            </td>
+                                        </tr>
                                         <v-divider></v-divider>
                                     </tbody>
                                 </v-table>
                             </v-card>
                         </v-col>
                     </v-row>
-                    <v-row>
-                        <v-col lg="8" md="4" sm="12">
+                    <v-row v-if="users.length > 0">
+                        <v-col lg="8" md="4" sm="9" xs>
                             <v-row>
                                 <p class="ml-6 opacity">Showing</p>
-                                <v-col sm="12" md="1" lg="4" class="d-flex">
+                                <v-col xs sm="12" md="6" lg="4" class="d-flex">
                                     <v-select v-model="seletedValue" density="compact" style="max-width: 34%!important;"
                                         :items="['10', '20', '30', '40', '50']" variant="outlined"></v-select>
                                     <p class="opacity mt-2 ml-1">of {{ total }}</p>
                                 </v-col>
                             </v-row>
                         </v-col>
-                        <v-col cols="4">
+                        <v-spacer class="d-xs-none d-sm-none"></v-spacer>
+                        <v-col lg="4" md="6" sm="3" xs>
                             <v-pagination v-model="page" active-color="#0F60FF" variant="text" density="compact"
                                 :length="lengthPage"></v-pagination>
                         </v-col>
@@ -190,8 +199,10 @@ onMounted(() => {
 }
 
 .opacity {
-    font-display: Public Sans;
+    font-family: 'Public Sans', sans-serif;
     margin-top: 18px;
+    font-weight: 500;
+    font-size: 15px;
     opacity: 0.6;
 }
 </style>
