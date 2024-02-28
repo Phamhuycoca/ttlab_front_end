@@ -1,14 +1,14 @@
 <template>
     <div class="px-8 mt-4">
         <v-row>
-            <v-col sm="12" md="5" lg="3" style="max-width: 316px;border: 1px;!important">
+            <v-col sm="12" md="2" lg="3" style="max-width: 316px;border: 1px;!important">
                 <v-text-field variant="solo" placeholder="Tìm kiếm" @change="searchData()" v-model="search"
                     append-inner-icon="mdi-magnify" density="compact">
                 </v-text-field>
             </v-col>
             <v-spacer></v-spacer>
-            <v-col sm="4" md="5" lg="4" class="text-right">
-                <v-btn color="#0F60FF" prepend-icon="mdi-plus" class="text-capitalize" min-height="40" min-width="122"
+            <v-col sm="2" md="5" lg="4" class="text-right">
+                <v-btn color="#0F60FF" prepend-icon="mdi-plus" class="text-capitalize" min-height="40" max-width="122"
                     rounded="lg" @click="dialog = true, currentValue = ''">Tạo
                     mới</v-btn>
             </v-col>
@@ -80,7 +80,7 @@
                                 <p class="ml-6 opacity">Showing</p>
                                 <v-col sm="12" md="1" lg="4" class="d-flex">
                                     <v-select v-model="seletedValue" density="compact" style="max-width: 34%!important;"
-                                        :items="['10', '20', '40', '30', '50']" variant="outlined"></v-select>
+                                        :items="['10', '20', '30', '40', '50']" variant="outlined"></v-select>
                                     <p class="opacity mt-2 ml-1">of {{ total }}</p>
                                 </v-col>
                             </v-row>
@@ -178,6 +178,7 @@ const Remove = async () => {
 onMounted(() => {
     DEFAULT_COMMON_LIST_QUERY.keyword = '';
     DEFAULT_COMMON_LIST_QUERY.page = 1;
+    DEFAULT_COMMON_LIST_QUERY.limit = 10;
     loadData();
 });
 

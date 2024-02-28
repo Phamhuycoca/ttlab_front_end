@@ -160,6 +160,7 @@ const Remove = async () => {
 onMounted(() => {
     DEFAULT_COMMON_LIST_QUERY.keyword = '';
     DEFAULT_COMMON_LIST_QUERY.page = 1;
+    DEFAULT_COMMON_LIST_QUERY.limit = 10;
     loadData();
 });
 </script>

@@ -55,11 +55,14 @@
                         </div>
                         <v-text-field placeholder="Nhập link ảnh sản phẩm" style="background-color: white;"
                             density="compact" @change="handleImageChange" single-line hide-details variant="outlined"
-                            clearable type="file" v-model="file" v-bind="fileAttrs"></v-text-field>
-                        <div v-show="errors.file" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
+                            clearable type="file" v-model="file"></v-text-field>
+                        <!-- <div v-show="errors.file" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
                                 errors.file
-                            }}</div>
+                            }}</div> -->
+                        <div v-show="props.currentValue === '' && errors.file" class="mt-2" style="color: red;">
+                            {{ props.currentValue === '' ? errors.file : '' }}
+                        </div>
                     </v-col>
                 </v-row>
             </v-container>
@@ -101,10 +104,10 @@ const createValidationSchema = () => {
         file: yup
             .mixed()
             .test('custom-validation', 'Vui lòng chọn ảnh', function (value) {
-                if (props.currentValue === '') {
-                    return false;
-                } else {
+                if (props.currentValue !== '') {
                     return true;
+                } else {
+                    return value !== undefined && value !== null && value !== '';
                 }
             })
     });
@@ -135,6 +138,8 @@ watch(() => props.currentValue, (newValue, oldValue) => {
     if (newValue === '') {
         resetForm();
     } else {
+        imageFile.value = '';
+        file.value = '';
         name.value = newValue.name;
         price.value = newValue.price;
         description.value = newValue.description;
@@ -144,7 +149,7 @@ watch(() => props.currentValue, (newValue, oldValue) => {
 });
 
 const handleClose = () => {
-    resetForm();
+    // resetForm();
     emit('close');
 };
 
@@ -168,7 +173,7 @@ const createProduct = handleSubmit(async values => {
             if (res.success) {
                 showSuccessNotification(res.message)
             } else {
-                showErrorNotification(res.error)
+                res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
             }
         } else {
             const formData = new FormData();
@@ -188,7 +193,10 @@ const createProduct = handleSubmit(async values => {
     } catch (error) {
         console.error('Error creating product:', error);
     } finally {
+        resetForm();
         handleClose();
+        imageFile.value = '';
+        file.value = '';
         emit('updateData');
     }
 });
