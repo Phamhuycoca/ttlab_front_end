@@ -36,9 +36,7 @@
                 </v-badge>
             </v-btn>
             <v-avatar class="mr-4" id="menu-activator" style="cursor: pointer;">
-                <v-img v-if="avatar === null" src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
-                <v-img v-else :src="avatar" alt="John"></v-img>
-
+                <v-img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
             </v-avatar>
             <v-menu activator="#menu-activator" style="cursor: pointer;" width="200">
                 <v-list>
@@ -57,33 +55,41 @@
     </v-app>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import Confirm from '@/common/Element/Confirm.vue';
 import router from '../router';
 import { showSuccessNotification } from '../common/helpers';
 import { useLoadingStore } from '@/store/loading.store';
 import localStorageAuthService from '../common/storages/authStorage';
-import { ref, onMounted } from 'vue';
 
 const loading = useLoadingStore();
 
-const drawer = ref(true)
-const rail = ref(false)
-const dialogremove = ref(false)
-const avatar = ref('')
-const Remove = async () => {
-    loading.openLoading(true);
-    try {
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        router.push('/login');
-        showSuccessNotification('Đăng xuất thành công');
-    } finally {
-        loading.openLoading(false);
-    }
+export default {
+    data() {
+        return {
+            drawer: true,
+            rail: false,
+            dialogremove: false,
+            avatar: '' // Add the avatar property here
+        };
+    },
+    methods: {
+        async Remove() {
+            loading.openLoading(true);
+
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                router.push('/login');
+
+                showSuccessNotification('Đăng xuất thành công');
+            } finally {
+                loading.openLoading(false);
+            }
+        }
+    },
+    components: { Confirm }
 }
-onMounted(() => {
-    avatar.value = localStorageAuthService.getAvatar();
-});
 </script>
 
 
