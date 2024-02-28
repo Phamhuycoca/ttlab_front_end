@@ -15,7 +15,10 @@ import localStorageAuthService from '../../../../common/storages/authStorage';
 import { Role, FORM_VALIDATION, Regex } from '../../../../common/constants';
 const { errors, handleSubmit, validate, defineField } = useForm({
     validationSchema: yup.object({
-        email: yup.string().email('Email không đúng định dạng').required('Vui lòng nhập email'),
+        email: yup.string().required('Vui lòng nhập email').matches(
+            Regex.EMAIL,
+            'Email không hợp lệ'
+        ),
         password: yup.string().required('Vui lòng nhập mật khẩu').min(FORM_VALIDATION.passwordMinLength, 'Mật khẩu tối thiểu 8 kí tự').max(FORM_VALIDATION.textMaxLength, 'Mật khẩu không quá 30 kí tự').matches(Regex.PASSWORD, 'Mật khẩu phải có ít nhất 1 số hoặc chữ'),
     }),
 });
@@ -47,7 +50,7 @@ const [password, passwordAttrs] = defineField('password');
     <div>
         <v-card class="mx-auto pa-12 pb-8 my-6" variant="flat" max-width="500" rounded="lg">
             <v-img class="mx-auto my-6" max-width="100" :src="image"></v-img>
-            <div class="text-h4 text-center">
+            <div class="text-h4 text-center" style="font-size: 32px;font-weight: 400;">
                 Đăng nhập
             </div>
             <div class="text-subtitle-1 text-medium-emphasis" v-bind="emailAttrs">Email</div>
@@ -59,27 +62,42 @@ const [password, passwordAttrs] = defineField('password');
             <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
                 Mật khẩu
             </div>
-
             <v-text-field :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'" :type="visible ? 'text' : 'password'"
-                density="compact" placeholder="Nhập mật khẩu" variant="outlined" @click:append-inner="visible = !visible"
+                density="compact" placeholder="••••••••••••••" variant="outlined" @click:append-inner="visible = !visible"
                 v-model="password"></v-text-field>
-            <div v-show="errors.password" text-subtitle-1 text-medium-emphasis class="mb-4" style="color: red;">{{
+            <div v-show="errors.password" text-subtitle-1 text-medium-emphasis style="color: red;">{{
                 errors.password }}</div>
             <div class="d-flex justify-space-between align-center">
-                <v-checkbox v-model="terms" color="secondary" label="Ghi nhớ Đăng nhập"></v-checkbox>
-                <a class="text-caption text-decoration-none text-blue mb-6">
+                <div class="mb-6 d-flex justify-space-between align-center">
+                    <input type="checkbox" class="mx-auto mr-2"
+                        style="width: 16px;height: 16px;border: 1px solid #FFFFFF; border-radius: 4px;" />
+                    <div style="font-weight: 500;font-size: 14px;line-height: 20px;">
+                        Ghi nhớ Đăng nhập
+                    </div>
+                </div>
+                <!-- <v-checkbox v-model="terms" color="secondary" label="Ghi nhớ Đăng nhập"></v-checkbox> -->
+                <a class="text-caption text-decoration-none mb-6"
+                    style="font-weight: 600;font-size: 16px;line-height: 20px;color: #0F60FF;">
                     Quên mật khẩu?</a>
             </div>
             <v-btn block class="mb-8" color="#0F60FF" size="large" @click="onSubmit">
-                Đăng nhập
+                <span class="text-capitalize">Đăng</span>
+                <p class="text-lowercase"> nhập</p>
             </v-btn>
-            <div class="text-center">
-                Bạn chưa có tài khoản ?
-                <a class="text-decoration-none text-center" style="color:#0F60FF;">
-                    Đăng ký ?
+            <div class=" d-flex align-center justify-center">
+                <div style="font-size: 14px;font-weight: 400;line-height: 20px;">
+                    Bạn chưa có tài khoản?
+                </div>
+                <a class="text-decoration-none text-center ml-1"
+                    style="font-weight: 600;font-size: 14px;line-height: 20px;color:#0F60FF;">
+                    Đăng ký
                 </a>
             </div>
         </v-card>
     </div>
 </template>
-<style></style>
+<style scoped>
+* {
+    font-family: 'Public Sans', sans-serif;
+}
+</style>

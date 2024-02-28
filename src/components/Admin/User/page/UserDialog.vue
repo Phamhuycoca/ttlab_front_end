@@ -23,9 +23,12 @@
                             <p>Email</p>
                             <span class="ml-1" style="color: blue;">*</span>
                         </div>
-                        <v-text-field style="background-color: white;" :disabled="isDisabled" label="Nhập email"
+                        <!-- <v-text-field style="background-color: white;" :disabled="isDisabled" label="Nhập email"
                             density="compact" single-line :error-messages="errors.email" v-model="email" v-bind="emailAttrs"
-                            hide-details variant="outlined"></v-text-field>
+                            hide-details variant="outlined"></v-text-field> -->
+                        <v-text-field style="background-color: white;" label="Nhập email" density="compact" single-line
+                            :error-messages="errors.email" v-model="email" v-bind="emailAttrs" hide-details
+                            variant="outlined"></v-text-field>
                         <div v-show="errors.email" class="mt-2" style="color: red;">{{
                             errors.email
                         }}</div>
@@ -92,6 +95,7 @@ const emit = defineEmits();
 const imageFile = ref(null);
 import { userServiceApi } from '@/components/Admin/User/Service/user.api';
 import { showSuccessNotification, showErrorNotification } from '../../../../common/helpers';
+import { FORM_VALIDATION, Regex } from '../../../../common/constants';
 
 const handleImageChange = (event) => {
     imageFile.value = event.target.files[0];
@@ -104,7 +108,7 @@ const { errors, handleSubmit, resetForm, defineField } = useForm({
             'Tên không hợp lệ'
         ),
         email: yup.string().required('Vui lòng nhập email').matches(
-            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            Regex.EMAIL,
             'Email không hợp lệ'
         ),
         birthday: yup.string().required('Vui lòng nhập ngày sinh').matches(
@@ -117,9 +121,11 @@ const { errors, handleSubmit, resetForm, defineField } = useForm({
                 return birthdayDate <= currentDate;
             }),
         phone: yup.string().matches(
-            /^0\d{9,10}$/,
-            'Số điện thoại không hợp lệ. Số điện thoại phải có 10 chữ số.'
-        ),
+            FORM_VALIDATION.phoneRegExp,
+            'Số điện thoại không hợp lệ')
+            .min(10, 'Số điện thoại không dưới 10 số')
+            .max(10, 'Số điện thoại không được quá 10 số')
+        ,
         file: yup
             .mixed()
             .test('custom-validation', 'Vui lòng chọn ảnh', function (value) {

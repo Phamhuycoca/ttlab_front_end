@@ -77,7 +77,6 @@ import Footer from "../components/Page/Footer.vue";
 const chips = reactive(['worldwide shipping', 'under $50', 'kitten', 'plastic plugs', 'pucker shoes', 'vintage typewriter'])
 const selectBy = reactive([
     { text: 'Tất cả', value: '' },
-    { text: 'Giày', value: 'Giày' },
     { text: 'Quần', value: 'Quần' },
     { text: 'Áo', value: 'Áo' },
     // 'Tất cả', 'Giày', 'Quần', 'Áo'

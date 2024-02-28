@@ -82,6 +82,7 @@ import { useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { productServiceApi } from "@/components/Admin/Product/Service/product.api";
 import { showSuccessNotification, showErrorNotification } from '../../../../common/helpers';
+import { forEach } from 'lodash';
 
 
 const props = defineProps(['close', 'currentValue']);
@@ -159,6 +160,13 @@ const handleImageChange = (event) => {
     const file = event.target.files[0];
     imageFile.value = file;
 };
+const showErrors = (errors: string[]) => {
+    errors.forEach((message, index) => {
+        setTimeout(() => {
+            showErrorNotification(message);
+        }, index * 1000);
+    });
+};
 
 const createProduct = handleSubmit(async values => {
     try {
@@ -187,7 +195,7 @@ const createProduct = handleSubmit(async values => {
             if (res.success) {
                 showSuccessNotification(res.message)
             } else {
-                showErrorNotification(res.error)
+                res.status === 400 ? showErrorNotification(res.message) : showErrorNotification(res.message)
             }
         }
     } catch (error) {
