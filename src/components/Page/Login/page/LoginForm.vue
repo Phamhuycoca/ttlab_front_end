@@ -77,7 +77,7 @@ const [password, passwordAttrs] = defineField('password');
                 </div>
                 <!-- <v-checkbox v-model="terms" color="secondary" label="Ghi nhớ Đăng nhập"></v-checkbox> -->
                 <a class="text-caption text-decoration-none mb-6"
-                    style="font-weight: 600;font-size: 16px;line-height: 20px;color: #0F60FF;">
+                    style="font-weight: 600;font-size: 16px;line-height: 20px;color: #0F60FF;cursor: pointer;">
                     Quên mật khẩu?</a>
             </div>
             <v-btn block class="mb-8" color="#0F60FF" size="large" @click="onSubmit">

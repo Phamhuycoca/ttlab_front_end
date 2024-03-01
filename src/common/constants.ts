@@ -6,7 +6,9 @@ export enum PageName {
   ADMIN='admin',
   PRODUCT='product',
   USER='user',
-  Home='trang-chu'
+  Home='trang-chu',
+  HomePage='homepage',
+  ForgotPage='forgot-Password'
 }
 
 export enum SupportLanguage {

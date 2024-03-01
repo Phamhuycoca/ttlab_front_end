@@ -13,18 +13,33 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path:'/homepage',
+    name:PageName.HomePage,
+    component:()=>import('../views/page/HomePage.vue'),
+    meta:{
+      public:true,
+    }
+  },
+  {
     path: '/index',
     name:'index',
     component:()=>import('../views/Index.vue'),
     meta: {
       public: true,
     }
-
   },
   {
     path:'/login',
     name: PageName.LOGIN_PAGE,
     component:()=>import('../components/Page/Login/page/LoginForm.vue'),
+    meta: {
+      public: true,
+    }
+  },
+  {
+    path:'/forgotPassword',
+    name: PageName.ForgotPage,
+    component:()=>import('../components/Page/Login/page/ForgotForm.vue'),
     meta: {
       public: true,
     }

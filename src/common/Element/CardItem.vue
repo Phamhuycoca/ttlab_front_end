@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-row style="margin-left: -60px;margin-right: -62px;">
-            <v-col cols="12" sm="12" lg="3" v-for="(item, index) in filteredItems" :key="index"
+            <v-col cols="12" sm="12" md="6" lg="3" v-for="(item, index) in filteredItems" :key="index"
                 style="display: flex;justify-content: center;" class="mt-4 mb-4">
                 <v-card variant="flat" hover min-height="472px" width="258px" style="border-radius: 4px;">
                     <v-img cover class="mx-auto" style="border-radius: 4px; top: 16px;" width="226" height="224"
