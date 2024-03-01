@@ -1,68 +1,112 @@
 <template>
     <div>
-        <v-card>
-            <div class="py-6 px-6">
-                <v-row>
-                    <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 180px;!important">
-                        <v-row>
-                            <v-select class="ma-2" label="SORT BY" :items="selectBy" v-model="selectedValue"
-                                item-value="value" item-title="text" density="compact" variant="outlined"></v-select>
+        <v-row class="ml-3 mt-3">
+            <v-col cols="4" sm="6" md="6" lg="2">
+                <v-select v-model="SelectedCategory" density="compact" label="SORT BY" :items="['All', 'Quần', 'Áo']"
+                    variant="outlined"></v-select>
+            </v-col>
+            <v-col cols="4" sm="6" md="6" lg="2">
+                <v-select v-model="selectedSort" density="compact" :items="['Từ cao -> thấp', 'Từ thấp -> cao']"
+                    variant="outlined"></v-select>
+            </v-col>
+            <v-col cols="4" sm="6" md="6" lg="2">
+                <v-select v-model="selectedThree" density="compact"
+                    :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                    variant="outlined"></v-select>
+            </v-col>
+            <v-col cols="12" sm="6" md="6" lg="6" class="text-right">
+                <v-btn style="background-color: #EBF2FF;color:#0f0f13;max-width: 256px;height: 36px;"
+                    class="rounded-1 text-capitalize font-weight-regular" variant="text">
+                    Show
+                    <span class="text-lowercase ml-1"> all</span>
+                </v-btn>
+                <v-btn style="font-weight: 400;color: rgb(34, 100, 209);" bg-color="white" class="rounded-1 text-capitalize"
+                    elevation="2">
+                    Auction
+                </v-btn>
+                <v-btn style="background-color:#EBF2FF;;color:#0f0f13" class="rounded-1 text-capitalize font-weight-regular"
+                    variant="text">
+                    Buy
+                    <span class="text-lowercase ml-1"> now</span>
+                </v-btn>
+                <v-btn style="background-color: #EBF2FF;" class="ml-5" ariant="tonal" elevation="0">
+                    <v-icon>mdi mdi-menu</v-icon>
+                </v-btn>
+                <v-btn class="mr-5" variant="elevated">
+                    <v-icon style="color: #0c5bda;">mdi mdi-microsoft</v-icon>
+                </v-btn>
+            </v-col>
+        </v-row>
+        <v-row class="mr-3 ml-1">
+            <v-col cols="12">
+                <v-chip variant="text"><span class="mt-2" style="font-weight: 550;">Related</span></v-chip>
+                <v-chip class="mr-2 mt-2">
+                    worldwide shipping
+                </v-chip>
+                <v-chip class="mr-2 mt-2">
+                    under $50
+                </v-chip>
+                <v-chip class="mr-2 mt-2">
+                    kitten
+                </v-chip>
+                <v-chip class="mr-2 mt-2">
+                    plastic plugs
+                </v-chip>
+                <v-chip class="mr-2 mt-2">
+                    pucker shoes
+                </v-chip>
+                <v-chip class="mr-2 mt-2">
+                    vintage typewriter
+                </v-chip>
+            </v-col>
+        </v-row>
+        <v-card class="custom-shadow">
+            <v-row class="mr-3 ml-3 mt-1">
+                <v-col class="d-flex flex-column justify-center align-center" v-for="item in products" :key="item" cols="12"
+                    sm="6" md="4" lg="3">
+                    <v-card hover variant="flat" style="min-height: 472px;width: 250px;" class="mb-3 my-card">
+                        <v-img class="mx-auto mt-2" width="220px" height="224px" :src="item.url"
+                            alt="Product Image"></v-img>
+                        <v-card-text class="my-card-text"
+                            style="max-width: 227px;font-size: 16px;line-height: 24px; height: 90px;font-family: 'Inter', sans-serif;color: #19191D;">{{
+                                item.name }}</v-card-text>
+                        <v-card-text class="mt-2 mx-auto"
+                            style="font-family: 'Inter', sans-serif;color:#000000;max-width: 250px;font-size: 24px;font-weight: 700;padding: auto;height: 36px;">
+                            {{ item.price }}
+                            <span v-if="item.sale > 0"
+                                style="border-radius: 4px;margin-right: 0.7%;font-size: 12px;float: right;min-width: 70px;min-height: 24px;padding: 2px;background-color: #ECF7ED;text-align: center;color: #37833B;font-weight: 300;font-family: Roboto;">
+                                {{ item.sale }}% OFF
+                            </span>
+                            <span v-if="item.cool == true"
+                                style="border-radius: 4px;margin-right: 0.7%;font-size: 12px;float: right;min-width: 70px;min-height: 24px;padding: 2px;background-color: #FDEDF2;text-align: center;color: #C23564;font-weight: 300;font-family: Roboto;">
+                                Cool deal!
+                            </span>
+                        </v-card-text>
+                        <p class="ml-4"
+                            style="margin-top: 8px;;height: 41px;font-size: 14px;font-family: 'Inter', sans-serif;color: #787885;">
+                            {{ item.description }}</p>
+                        <v-row style="margin-top: 5px;margin-left: -6px;">
+                            <v-col class="ml-3 mt-1" cols="5" style="display: flex;">
+                                <v-icon color="amber" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon color="amber" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon color="amber" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon color="amber" size="x-small">mdi mdi-star</v-icon>
+                                <v-icon v-if="item.feedback < 5 && item.feedback > 4" color="amber" size="x-small">mdi
+                                    mdi-star-half</v-icon>
+                                <v-icon v-else color="amber" size="x-small">mdi mdi-star</v-icon>
+                                <span style="font-size: 12px;">4.05</span>
+                            </v-col>
+                            <v-col class="text-right" cols="6">
+                                <v-btn class="text-capitalize"
+                                    style="margin-right: 6px;font-family: 'Inter', sans-serif;font-size: 14px;"
+                                    color="primary" size="small" prepend-icon="mdi-heart-outline" variant="outlined">
+                                    Watch
+                                </v-btn>
+                            </v-col>
                         </v-row>
-                    </v-col>
-                    <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 170px;!important">
-                        <v-row>
-                            <v-select class="ma-2" label="Condition" :items="selectStatus" v-model="status"
-                                item-value="value" item-title="text" density="compact" variant="outlined"></v-select>
-                        </v-row>
-                    </v-col>
-                    <v-col cols="6" sm="12" md="6" lg="2" style="max-width: 200px;!important">
-                        <v-row>
-                            <v-select class="ma-2" label="Delivery options" :items="selectPrice" v-model="price"
-                                item-value="value" item-title="text" density="compact" variant="outlined"></v-select>
-                        </v-row>
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-col cols="12" sm="12" md="8" lg="6">
-                        <v-row>
-                            <v-spacer></v-spacer>
-                            <v-btn class="text-capitalize font-weight-regular mt-2" variant="text" size="large"
-                                style="background-color: #EBF2FF;">Show
-                                all</v-btn>
-                            <v-btn class="text-capitalize font-weight-regular mt-2" elevation="2" size="large"
-                                style="color: #2264D1;">Auction</v-btn>
-                            <v-btn class="text-capitalize font-weight-regular mt-2 mr-4" variant="text" size="large"
-                                style="background-color: #EBF2FF;">But
-                                now</v-btn>
-                            <v-btn class="mt-2 ml-4 text-disabled" variant="text" size="large"
-                                style="background-color: #EBF2FF;">
-                                <v-icon>mdi-menu</v-icon>
-                            </v-btn>
-                            <v-btn class="mt-2" size="large">
-                                <v-icon color="#2264D1">mdi-microsoft</v-icon>
-                            </v-btn>
-                        </v-row>
-                    </v-col>
-                </v-row>
-            </div>
-
-            <div>
-                <v-row class=" ml-1">
-                    <h3 class="ma-4"
-                        style="font-family: 'Inter', sans-serif;font-weight: 500;line-height: 20.02px;font-size: 14px;color: #19191D;!important">
-                        Releted
-                    </h3>
-                    <v-chip-group v-for="(chip, index) in chips" :key="index">
-                        <v-chip>
-                            <div style="font-size: 14px;font-family: 'Inter', sans-serif;color: #19191D;">
-                                {{ chip }}
-                            </div>
-                        </v-chip>
-                    </v-chip-group>
-                </v-row>
-            </div>
-            <div>
-                <CardItem :selectedValue="selectedValue" :status="status" :price="price" />
-            </div>
+                    </v-card>
+                </v-col>
+            </v-row>
         </v-card>
         <div class="mt-10 mb-10">
             <Footer />
@@ -71,40 +115,93 @@
 </template>
   
 <script setup lang="ts">
-import { reactive, ref, watch } from "vue"
-import CardItem from '../common/Element/CardItem.vue'
-import Footer from "../components/Page/Footer.vue";
-const chips = reactive(['worldwide shipping', 'under $50', 'kitten', 'plastic plugs', 'pucker shoes', 'vintage typewriter'])
-const selectBy = reactive([
-    { text: 'Tất cả', value: '' },
-    { text: 'Quần', value: 'Quần' },
-    { text: 'Áo', value: 'Áo' },
-    // 'Tất cả', 'Giày', 'Quần', 'Áo'
+import { ref, reactive, computed } from "vue"
+import product1 from "@/assets/01.png"
+import product2 from "@/assets/02.png"
+import product3 from "@/assets/03.png"
+import product4 from "@/assets/04.png"
+import product5 from "@/assets/05.png"
+import product6 from "@/assets/06.png"
+import product7 from "@/assets/07.png"
+import product8 from "@/assets/08.png"
+import product9 from "@/assets/09.png"
+import product10 from "@/assets/010.png"
+import product11 from "@/assets/011.png"
+import product12 from "@/assets/012.png"
+import Footer from "@/components/Page/Footer.vue"
+const products = reactive([
+    {
+        url: product1, name: "Vintage Typewriter to post awesome stories about UI design and webdev.", price: "$49.50", sale: 0, cool: false, description: "Eligible for Shipping To Mars or somewhere else", feedback: 4.05
+    },
+    {
+        url: product2, name: "Lee Pucker design. Leather botinki for handsome designers. Free shipping.", price: "$13.95", sale: 0, cool: false, description: "1258 bids, 359 watchers $5.95 for shipping", feedback: 4.56
+    },
+    {
+        url: product3, name: "Timesaving kitten to save months on development. Playful, cute, cheap!", price: "$128.99", sale: 0, cool: false, description: "Eligible for nothing :(", feedback: 4.87
+    },
+    {
+        url: product4, name: "Plastic useless plugs and tubes for high-fidelity prototyping. Fit & Eat!", price: "$12.48", sale: 50, cool: false, description: "Wordwide shitting available Buyers protection possible!", feedback: 4.99
+    },
+    {
+        url: product5, name: "Creativity stimulating lotion. Drink every morning to generate better ideas!", price: "$12.48", sale: 0, cool: false, description: "Wordwide shifting available Buyers protection possible!", feedback: 4.99
+    },
+    {
+        url: product6, name: "Prototyping items to create a lot if useless things...", price: "$128.99", sale: 0, cool: false, description: "Showcasing onHovered state", feedback: 4.87
+    },
+    {
+        url: product7, name: "John Von Ebalkin SPRING ", price: "$13.95", sale: 0, cool: false, description: "1258 bids, 359 watchers $5.95 for shipping", feedback: 4.56
+    },
+    {
+        url: product8, name: "Envelope, Stripes, Pencil and etc. Purchase this kit today and feel OKAY", price: "$9.50", sale: 0, cool: false, description: "Eligible for Shipping To Mars or somewhere else", feedback: 4.77
+    },
+    {
+        url: product9, name: "Professional teadrinking set for every designer and developer", price: "$128.99", sale: 0, cool: false, description: "Eligible for nothing :(", feedback: 4.87
+    },
+    {
+        url: product10, name: "One string Bonsai description", price: "$11.68", sale: 0, cool: false, description: "Wordwide shifting available Buyers protection possible!", feedback: 4.99
+    },
+    {
+        url: product11, name: "Simply best item in town to shine bright with your Nine Inch Nails", price: "$1.25", sale: 0, cool: true, description: "Eligible for Shipping To Mars or somewhere else", feedback: 4.77
+    },
+    {
+        url: product12, name: "KISTOCHKI & KRASIBO. Top cosmetics brand from Chelyabinsk is here!", price: "$23.25", sale: 0, cool: false, description: "1258 bids, 359 watchers $5.95 for shipping", feedback: 4.56
+    }
 ])
-const selectStatus = reactive([
-    { text: 'Tất cả', value: '' },
-    { text: 'Giảm 50%', value: 0 },
-    { text: 'Cool deal', value: 1 },
-])
-const selectPrice = reactive([
-    { text: 'Tất cả', value: '' },
-    { text: 'Từ thấp đến cao', value: 'Từ thấp đến cao' },
-    { text: 'Từ cao đến thấp', value: 'Từ cao đến thấp' },
-    // 'Tất cả', 'Từ thấp đến cao', 'Từ cao đến thấp'
-]);
-const selectedValue = ref('')
-const status = ref('');
-const price = ref('');
-//console.log(status.value)
-// watch(() => status.value, (newValue) => {
-//   console.log(newValue);
-// });
+const SelectedCategory = ref('Useless first')
+const selectedSort = ref('Condition')
+const selectedThree = ref('Delivery options')
+
+const filteredProducts = computed(() => {
+    let filtered = [];
+
+    if (SelectedCategory.value === 'All') {
+        filtered = [...products];
+    } else {
+        filtered = products.filter(product => product.name.includes(SelectedCategory.value));
+    }
+    if (selectedSort.value === "Từ cao -> thấp") {
+        return filtered.sort((a, b) => b.price - a.price);
+    } else {
+        return filtered.sort((a, b) => a.price - b.price);
+    }
+});
 </script>
   
-  
-<style scoped>
-* {
-    font-family: 'Epilogue', sans-serif;
-    font-family: 'Inter', sans-serif;
+<style>
+.custom-shadow {
+    margin-top: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.my-card {
+    max-height: 200px;
+    /* Đặt chiều cao tối đa của thẻ */
+    overflow: hidden;
+    /* Ẩn phần nội dung vượt quá chiều cao */
+}
+
+.my-card-text {
+    overflow-y: hidden;
 }
 </style>

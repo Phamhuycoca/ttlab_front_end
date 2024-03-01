@@ -17,7 +17,7 @@ import localStorageAuthService from "@/common/storages/authStorage";
       id: string,
       formData: FormData
     ): Promise<IBodyResponse<any>> {
-      return await this.client.put(`${this.baseUrl}/${id}`, formData, {
+      return await this.client.patch(`${this.baseUrl}/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           'Authorization': 'Bearer '+localStorageAuthService.getAccessToken()

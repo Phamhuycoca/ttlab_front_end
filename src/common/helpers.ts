@@ -170,3 +170,6 @@ export function formatPhoneNumber(phoneNumber: string): string {
   const formatted: string = cleaned.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
   return formatted;
 }
+export const formatNumberWithCommas=(value:string)=> {
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

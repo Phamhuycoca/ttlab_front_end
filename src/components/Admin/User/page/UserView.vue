@@ -1,102 +1,100 @@
 <template>
-    <div class="px-8 mt-4">
+    <div style="margin: 1.5%;">
         <v-row>
-            <v-col xs sm="3" md="2" lg="3" style="max-width: 316px;border: 1px;!important">
+            <v-col cols="5" sm="4" md="4" lg="3">
                 <v-text-field variant="solo" placeholder="Tìm kiếm" @change="searchData()" v-model="search"
-                    append-inner-icon="mdi-magnify" density="compact">
+                    append-inner-icon="mdi-magnify" density="compact" single-line hide-details>
                 </v-text-field>
             </v-col>
-            <v-spacer></v-spacer>
-            <v-col xs sm="3" md="2" lg="4" class="text-right">
+            <v-col cols="7" class="text-right" lg="9" sm="8" md="8">
                 <v-btn color="#0F60FF" prepend-icon="mdi-plus" class="text-capitalize" min-height="40" max-width="122"
                     rounded="lg" @click="dialog = true, currentValue = ''">Tạo
                     mới</v-btn>
             </v-col>
         </v-row>
-        <v-row style="margin-top: -2%;">
+        <v-row>
             <v-col cols="12">
-                <v-card class="mb-4" style="border-radius: 16px;border: 1px;">
-                    <v-row>
-                        <v-col cols="12">
-                            <v-card variant="text">
-                                <v-table density="compact" fixed-header>
-                                    <thead style="height: 47px;">
-                                        <tr>
-                                            <th class="text-center text-disabled text-uppercase text-medium-emphasi">
-                                                Avatar
-                                            </th>
-                                            <th class="text-left text-disabled text-uppercase text-medium-emphasis">
-                                                Tên người dùng
-                                            </th>
-                                            <th class="text-left text-disabled text-uppercase text-medium-emphasis">
-                                                Email
-                                            </th>
-                                            <th class="text-center text-disabled text-uppercase text-medium-emphasis">
-                                                Ngày sinh
-                                            </th>
-                                            <th class="text-center text-disabled text-uppercase text-medium-emphasis">
-                                                Số điện thoại
-                                            </th>
-                                            <th class="text-center text-disabled text-uppercase text-medium-emphasis">
-                                                Hành động
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(item, i) in users" :key="i" style="height: 58px;"
-                                            v-if="users.length > 0">
-                                            <td>
-                                                <v-img class="mx-auto" :src="item.avatar" width="36" contain height="36" />
-                                            </td>
-                                            <td class="text-left text-truncate font-weight-medium"
-                                                style="max-width: 150px;">{{
-                                                    item.name
-                                                }}</td>
-                                            <td class=" text-truncate" style="max-width: 150px;">
-                                                {{ item.email }}
+                <v-card style="border-radius: 16px;border: 1px;">
+                    <v-table density="compact">
+                        <thead>
+                            <tr style="height: 47px">
+                                <th style="width: 5px !important;padding-right: 0px;"
+                                    class="text-left text-disabled text-uppercase text-medium-emphasi">
+                                    <span>Avatar</span>
+                                </th>
+                                <th class="text-left text-disabled text-uppercase text-medium-emphasi">
+                                    Tên người dùng
+                                </th>
+                                <th class="text-left text-disabled text-uppercase text-medium-emphasi">
+                                    Email
+                                </th>
+                                <th class="text-left text-disabled text-uppercase text-medium-emphasi">
+                                    Ngày sinh
+                                </th>
+                                <th class="text-left text-disabled text-uppercase text-medium-emphasi">
+                                    Số điện thoại
+                                </th>
+                                <th class="text-center text-disabled text-uppercase text-medium-emphasi">
+                                    Hành động
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="users.length > 0" v-for="i in users" :key="i" style="height: 58px;">
+                                <td>
+                                    <v-img style="border-radius: 2px;" width="36" height="36" :src="i.avatar"></v-img>
+                                </td>
+                                <td style="color: #23272E;font-weight: 600;">{{ i.name }}</td>
+                                <td>{{ i.email }}</td>
+                                <td class="v-text-truncate">
+                                    {{ formatDatetime(i.birthday) }}
+                                </td>
+                                <td>
+                                    {{ maskPhone(i.phone) }}
+                                </td>
+                                <td class="text-center text-disabled">
+                                    <div class="d-flex align-center justify-center">
+                                        <span style="cursor: pointer;" @click="dialog = true, currentValue = i"
+                                            class="mr-3"><img width="24" height="24" :src="icon_edit"></span>
+                                        <span style="cursor: pointer;" @click="dialogremove = true, id = i.id"><img
+                                                width="24" height="24" :src="icon_delete"></span>
+                                    </div>
 
-                                            </td>
-                                            <td class="v-text-truncate text-center">
-                                                {{ formatDatetime(item.birthday) }}
-                                            </td>
-                                            <td class="text-center">
-                                                {{ maskPhone(item.phone) }}
-                                            </td>
-                                            <td class="text-center text-disabled">
-                                                <v-icon class="ma-1"
-                                                    @click="dialog = true, currentValue = item">mdi-clipboard-edit-outline</v-icon>
-                                                <v-icon class="ma-1"
-                                                    @click="dialogremove = true, id = item.id">mdi-trash-can-outline</v-icon>
-                                            </td>
-                                        </tr>
-                                        <tr v-else style="height: 58px;">
-                                            <td colspan="6">
-                                                <p class="text-center text-red">
-                                                    Không có dữ liệu
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <v-divider></v-divider>
-                                    </tbody>
-                                </v-table>
-                            </v-card>
-                        </v-col>
-                    </v-row>
-                    <v-row v-if="users.length > 0">
-                        <v-col lg="8" md="4" sm="9" xs>
+                                </td>
+                            </tr>
+                            <tr v-else>
+                                <td colspan="6">
+                                    <p class="text-center text-red">Không có dữ liệu</p>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                        </tbody>
+                    </v-table>
+                    <v-row v-show="users.length > 0" class="ma-2">
+                        <v-col cols="8" sm="8" md="8" lg="8">
                             <v-row>
-                                <p class="ml-6 opacity">Showing</p>
-                                <v-col xs sm="12" md="6" lg="4" class="d-flex">
-                                    <v-select v-model="seletedValue" density="compact" style="max-width: 34%!important;"
-                                        :items="['10', '20', '30', '40', '50']" variant="outlined"></v-select>
-                                    <p class="opacity mt-2 ml-1">of {{ total }}</p>
+                                <p class="mt-5 opacity">Showing</p>
+                                <v-col style="max-width: 105px" cols="5" sm="4" md="5" lg="2">
+                                    <v-select v-model="seletedValue" density="compact"
+                                        :items="['10', '20', '25', '30', '50']" variant="outlined"></v-select>
                                 </v-col>
+                                <p class="mt-5 opacity">of {{ total }}</p>
                             </v-row>
                         </v-col>
-                        <v-spacer class="d-xs-none d-sm-none"></v-spacer>
-                        <v-col lg="4" md="8" sm="3" xs>
-                            <v-pagination v-model="page" active-color="#0F60FF" variant="text" density="compact"
-                                :length="lengthPage"></v-pagination>
+                        <v-col cols="4" sm="4" md="4" lg="4">
+                            <p class="text-center page-table1" style="font-size: 15px;display: none;margin-top: 5px;">
+                                <span style="margin-bottom: 2px" @click="page = page - 1"
+                                    :class="{ 'text-grey-lighten-2': page === 1, 'text-black': page !== 1 }"><i
+                                        class="fa-solid fa-angle-left" style="cursor: pointer;"></i></span>
+                                <span
+                                    style="background-color: #E2ECFF;color: blue;opacity: 0.6;;border-radius: 4px;padding: 5px;"
+                                    class="ml-2 mr-2">{{ page }}</span>
+                                <span style="margin-bottom: 2px" @click="page = page + 1"
+                                    :class="{ 'text-grey-lighten-2': page === lengthPage, 'text-black': page !== lengthPage }"><i
+                                        class="fa-solid fa-chevron-right" style="cursor: pointer;"></i></span>
+                            </p>
+                            <v-pagination class="page-table2" v-model="page" active-color="#0F60FF" variant="text"
+                                density="compact" :length="lengthPage"></v-pagination>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -107,7 +105,10 @@
             @Remove="Remove()" />
     </div>
 </template>
+
 <script setup lang="ts">
+import icon_delete from "@/assets/trash.png"
+import icon_edit from "@/assets/edit.png"
 import { ref, onMounted, watch } from 'vue';
 import { DEFAULT_COMMON_LIST_QUERY, DEFAULT_LIMIT_FOR_PAGINATION } from '../../../../common/constants';
 import { useUser } from '../Service/user.service';
@@ -193,16 +194,67 @@ onMounted(() => {
 
 </script>
 <style scoped>
-.v-pagination__prev {
-    margin: 1px !important;
+body {
+    font-family: 'Public Sans', sans-serif;
+}
 
+th {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 500;
+    color: #8B909A;
+    font-size: 13px;
+}
+
+td {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 15px;
+}
+
+.text-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .opacity {
-    font-family: 'Public Sans', sans-serif;
-    margin-top: 18px;
-    font-weight: 500;
-    font-size: 15px;
     opacity: 0.6;
+}
+
+.v-table {
+    font-size: 15px;
+}
+
+.text-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.opacity {
+    opacity: 0.6;
+}
+
+@media (max-width: 500px) {
+    .opacity {
+        display: none;
+    }
+
+    .v-btn__content {
+        font-size: 10px;
+    }
+
+    .text-medium-emphasis {
+        font-size: 12px;
+    }
+
+    .page-table1 {
+        display: flex !important;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .page-table2 {
+        display: none !important;
+    }
 }
 </style>
