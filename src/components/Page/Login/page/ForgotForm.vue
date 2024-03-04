@@ -8,7 +8,8 @@
             <div class="text-subtitle-1 text-medium-emphasis" v-bind="emailAttrs">Email</div>
 
             <v-text-field density="compact" v-model="email" placeholder="Nhập email" variant="outlined"></v-text-field>
-            <div v-show="errors.email" text-subtitle-1 text-medium-emphasis class="mb-4" style="color: red;">{{ errors.email
+            <div v-show="errors.email" text-subtitle-1 text-medium-emphasis class="mb-4" style="color: red;">{{
+                errors.email
             }}</div>
             <v-btn block class="mb-8" color="#0F60FF" size="large" @click="onSubmit">
                 <span class="text-capitalize">Gửi</span>
@@ -18,14 +19,15 @@
                 <div style="font-size: 14px;font-weight: 400;line-height: 20px;">
                     Bạn chưa có tài khoản?
                 </div>
-                <a class="text-decoration-none text-center ml-1"
+                <router-link class="text-decoration-none text-center ml-1" to="/register"
                     style="font-weight: 600;font-size: 14px;line-height: 20px;color:#0F60FF;">
                     Đăng ký
-                </a>
+                </router-link>
             </div>
         </v-card>
     </div>
 </template>
+
 <script setup lang="ts">
 import { Regex, FORM_VALIDATION } from '@/common/constants';
 import image from '../../../../assets/ttlab-logo.svg';
