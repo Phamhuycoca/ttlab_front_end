@@ -1,121 +1,148 @@
 <template>
-    <div class="container">
-        <h1 class="title">Inside Open Art</h1>
-        <div class="parent">
-            <div class="child">
-                <v-img src="../assets/icon/Prison.png" height="30" width="30" class="child-icon" />
-                <span>4pt grid system</span>
-                <p>Base on 4pt grid system. Our UI kit help you create
-                    perfect white space</p>
-            </div>
-            <div class="child">
-                <v-img src="../assets/icon/Color Dropper.png" height="30" width="30" class="child-icon" />
-                <span>Color style</span>
-                <p>
-                    All color in OpenArt are styled. You can change all
-                    design color with one click
+    <div class="body">
+        <h2 style="">Inside Open Art</h2>
+        <div class="container">
+            <div>
+                <v-img src="../assets/icon/Prison.png" height="30" width="30" class="ml-2" />
+                <p style="color: #333333;font-size: 24px; font-weight: 400;font-family: Epilogue;">4pt grid system
                 </p>
+                <p style="color: #555555;font-size: 16px; font-weight: 400;font-family: Epilogue;">Base on 4pt gird
+                    system. Our UI KIT help you crate perfect white space</p>
             </div>
-            <div class="child">
-                <v-img src="../assets/icon/Vector.png" height="30" width="30" class="child-icon" />
-                <span>Free font</span>
-                <p>
-                    OpenArt use Epilogue font family
-                    Available with open licence in gooogle fontspace
-                </p>
+            <div>
+                <v-img src="../assets/icon/Color Dropper.png" height="30" width="30" class="ml-2" />
+                <p style="color: #333333;font-size: 24px; font-weight: 400;font-family: Epilogue;">Color style</p>
+                <p style="color: #555555;font-size: 16px; font-weight: 400;font-family: Epilogue;">All color in OpenArt
+                    are styled. You can change all
+                    design color with one click</p>
             </div>
-            <div class="child">
-                <v-img src="../assets/icon/Toggle On.png" height="30" width="30" class="child-icon" />
-                <span>Darkmode avaiable</span>
-                <p>
-                    Our UI Kit support dark
-                    mode Chage your design to dark mode with one click
-                </p>
+            <div>
+                <v-img src="../assets/icon/Vector.png" height="30" width="30" class="ml-2" />
+                <p style="color: #333333;font-size: 24px; font-weight: 400;font-family: Epilogue;">Free font</p>
+                <p style="color: #555555;font-size: 16px; font-weight: 400;font-family: Epilogue;">OpenArt use Epilogue
+                    font family</p>
+                <p style="color: #555555;font-size: 16px; font-weight: 400;font-family: Epilogue;">Available with open
+                    licence in gooogle font</p>
             </div>
-            <div class="child">
-                <v-img src="../assets/icon/Design.png" height="30" width="30" class="child-icon" />
-                <span>Easy to customize</span>
-                <p>
-                    Create any design with OpenArt UI kits
-                </p>
+            <div>
+                <v-img src="../assets/icon/Toggle On.png" height="30" width="30" class="ml-2" />
+                <p style="color: #333333;font-size: 24px; font-weight: 400;font-family: Epilogue;">Darkmode avaiable</p>
+                <p style="color: #555555;font-size: 16px; font-weight: 400;font-family: Epilogue;">Our UI Kit support
+                    darkmode</p>
+                <p style="color: #555555;font-size: 16px; font-weight: 400;font-family: Epilogue;">Chage your design to
+                    dark mode with one click</p>
             </div>
-            <div class="child">
-                <v-img src="../assets/icon/Four Squares.png" height="30" width="30" class="child-icon" />
-                <span>Variant components</span>
-                <p>
-                    All component art variant, easy to design,
-                    easy to control
+            <div>
+                <v-img src="../assets/icon/Design.png" height="30" width="30" class="ml-2" />
+                <p style="color: #333333;font-size: 24px; font-weight: 400;font-family: Epilogue;">Easy to customize</p>
+                <p style="color: #555555;font-size: 16px; font-weight: 400;font-family: Epilogue;">Create any design
+                    with OpenArt UI kits </p>
+            </div>
+            <div>
+                <v-img src="../assets/icon/Four Squares.png" height="30" width="30" class="ml-2" />
+                <p style="color: #333333;font-size: 24px; font-weight: 400;font-family: Epilogue;">Variant components
                 </p>
+                <p style="color: #555555;font-size: 16px; font-weight: 400;font-family: Epilogue;"> All component art
+                    variant, easy to design,
+                    easy to control</p>
             </div>
         </div>
     </div>
 </template>
-  
-<script lang="ts" setup>
 
+<script setup>
 </script>
-  
+
 <style scoped>
 * {
-    font-family: 'Epilogue', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0;
+    font-family: Epilogue, sans-serif !important;
+}
+
+.body {
+    background-image: url('@/assets/Image.png');
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    margin-top: 60px;
+    font-size: 40px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    font-family: Epilogue;
+}
+
+.container>div {
+    width: 30%;
+    background-color: white;
+    height: auto;
+    margin: 10px;
+    color: black;
+    border-radius: 16px;
+    padding: 20px;
 }
 
 .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: url('@/assets/Image.png');
-    background-size: cover;
-    background-position: center center;
-    width: 100%;
-    height: 100%;
-}
-
-.title {
-    margin-top: 116.56px;
-    margin-bottom: 3%;
-    font-size: 4rem;
-    text-align: center;
-}
-
-.parent {
-    display: flex;
-    justify-content: center;
-    align-content: stretch;
     flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    margin-top: 30px;
 }
 
-.child {
-
-    max-width: 493px;
-    margin: 0.8%;
-    /* max-height: 197.87px; */
-    max-height: 170px;
-    background-color: #FFFFFF;
-    border-radius: 16px;
+.container>div p:nth-child(2) {
+    margin: 10px;
+    font-weight: 500;
 }
 
-.child p:last-child {
-    opacity: 0.8;
+.container>div p:last-child,
+.container>div p:nth-child(3) {
+    opacity: 0.7;
+    margin-left: 10px;
 }
 
-.child-icon {
-    font-size: 24.03px;
-    margin: 30px 0 20px 30px;
+.container>div img {
+    width: 20px;
+    margin-left: 10px;
 }
 
-span {
-    margin: 0px 0px 10px 30px;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 24.6px;
-}
-
-p {
-    width: 396px;
+.container>div p {
     font-size: 16px;
-    margin: 10px 0px 20px 30px;
-    font-weight: 400;
     line-height: 21px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        align-content: center;
+    }
+
+    .container>div {
+        width: 70%;
+    }
+
+    .container>div:last-child() {
+        margin-bottom: 20px;
+    }
+}
+
+@media ((max-width: 800px)and (min-width: 601px)) {
+    .container {
+        flex-wrap: wrap;
+        align-content: center;
+    }
+
+    .container>div {
+        width: 40%;
+    }
 }
 </style>

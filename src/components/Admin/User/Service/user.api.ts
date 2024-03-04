@@ -6,9 +6,6 @@ import { IBodyResponse } from '@/common/interfaces';
 
 
 class UserApiService extends ApiService {
-  // async getAll(): Promise<IBodyResponse<any>> {
-  //   return this.client.get(`${this.baseUrl}`);
-  // }
   async createUser(formData: FormData): Promise<IBodyResponse<any>> {
     console.log(localStorageAuthService.getAccessToken());
     return await this.client.post(`${this.baseUrl}`, formData, {

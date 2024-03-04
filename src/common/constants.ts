@@ -8,7 +8,8 @@ export enum PageName {
   USER='user',
   Home='trang-chu',
   HomePage='homepage',
-  ForgotPage='forgot-Password'
+  ForgotPage='forgot-Password',
+  REGISTER_PAGE = 'register'
 }
 
 export enum SupportLanguage {

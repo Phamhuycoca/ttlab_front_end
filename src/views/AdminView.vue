@@ -1,7 +1,7 @@
 <template>
     <v-app>
-        <v-navigation-drawer style="border: 1px;position: fixed;" v-model="drawer" :rail="rail" class="navigation_drawer"
-            permanent>
+        <v-navigation-drawer style="border: 1px;position: fixed;" v-model="drawer" :rail="rail"
+            class="navigation_drawer" permanent>
             <v-toolbar @click.stop="rail = !rail" style="background-color: white;">
                 <v-row>
                     <v-col cols="8">
@@ -17,10 +17,32 @@
                 </v-row>
             </v-toolbar>
             <v-list density="compact" nav>
-                <v-list-item v-show="this.rail == false" class="text-uppercase" style="opacity: 0.6;font-size: 13px;">Quản
-                    lý sản phẩm</v-list-item>
-                <v-list-item prepend-icon="mdi-apps" title="Sản phẩm" value="Sản phẩm" to='/admin/sanpham'></v-list-item>
-                <v-list-item prepend-icon="mdi-account-group" title="User" value="User" to='user'></v-list-item>
+                <!-- <v-list-item v-show="this.rail == false" class="text-uppercase"
+                    style="opacity: 0.6;font-size: 13px;">Quản
+                    lý sản phẩm</v-list-item> -->
+                <!-- <v-list-item prepend-icon="mdi-apps" title="Sản phẩm" value="Sản phẩm"
+                    to='/admin/sanpham'></v-list-item> -->
+                <!-- <v-list-item prepend-icon="mdi-account-group" title="User" value="User" to='user'></v-list-item> -->
+                <v-list-item style="color: #8B909A;font-size: 24px;" to='/admin/sanpham'>
+                    <div style="display: flex; align-items: flex-start;">
+                        <img src="https://res.cloudinary.com/dyo42vgdj/image/upload/v1709198095/box_fcjahg.png"
+                            style="width: 22px; height: 22px;"><img>
+                        <div
+                            style="width: 170px; height: 22px; margin-left: 8px; font-family: Public Sans, sans-serif; font-size: 15px; font-weight: 400; line-height: 22px; color: #8B909A;">
+                            Sản Phẩm
+                        </div>
+                    </div>
+                </v-list-item>
+                <v-list-item style="color: #8B909A;font-size: 24px;" to='/admin/user'>
+                    <div style="display: flex; align-items: flex-start;">
+                        <img src="https://res.cloudinary.com/dyo42vgdj/image/upload/v1709197932/users_ru17it.jpg"
+                            style="width: 22px; height: 22px;"><img>
+                        <div
+                            style="width: 170px; height: 22px; margin-left: 8px; font-family: Public Sans, sans-serif; font-size: 15px; font-weight: 400; line-height: 22px; color: #8B909A;">
+                            User
+                        </div>
+                    </div>
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
         <v-app-bar class="px-4" style="background-color: #FAFAFA;" :elevation="0" rounded="0">

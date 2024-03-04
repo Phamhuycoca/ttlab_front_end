@@ -37,6 +37,14 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path:'/register',
+    name: PageName.REGISTER_PAGE,
+    component:()=>import('../components/Page/Login/page/Register.vue'),
+    meta: {
+      public: true,
+    }
+  },
+  {
     path:'/forgotPassword',
     name: PageName.ForgotPage,
     component:()=>import('../components/Page/Login/page/ForgotForm.vue'),

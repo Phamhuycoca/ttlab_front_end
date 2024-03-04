@@ -15,8 +15,8 @@
                             :error-messages="errors.name" required v-model="name" v-bind="nameAttrs" single-line
                             hide-details variant="outlined"></v-text-field>
                         <div v-show="errors.name" class="mt-2" style="color: red;">{{
-                            errors.name
-                        }}</div>
+        errors.name
+    }}</div>
                     </v-col>
                     <v-col cols="12" style="font-size: 13px;">
                         <div class="d-flex mb-2">
@@ -30,8 +30,8 @@
                             :error-messages="errors.email" v-model="email" v-bind="emailAttrs" hide-details
                             variant="outlined"></v-text-field>
                         <div v-show="errors.email" class="mt-2" style="color: red;">{{
-                            errors.email
-                        }}</div>
+        errors.email
+    }}</div>
                     </v-col>
                     <v-col cols="12" style="font-size: 13px;">
                         <div class="d-flex mb-2">
@@ -42,8 +42,8 @@
                             v-model="birthday" v-bind="birthdayAttrs" hide-details variant="outlined"
                             :error-messages="errors.birthday"></v-text-field>
                         <div v-show="errors.birthday" class="mt-2" style="color: red;">{{
-                            errors.birthday
-                        }}</div>
+        errors.birthday
+    }}</div>
                     </v-col>
                     <v-col cols="12" style="font-size: 13px;">
                         <div class="d-flex mb-2">
@@ -51,10 +51,11 @@
                             <span class="ml-1" style="color: blue;">*</span>
                         </div>
                         <v-text-field style="background-color: white;" label="Nhập số điện thoại" density="compact"
-                            v-model="phone" v-bind="phoneAttrs" single-line hide-details variant="outlined"></v-text-field>
+                            v-model="phone" v-bind="phoneAttrs" single-line hide-details
+                            variant="outlined"></v-text-field>
                         <div v-show="errors.phone" class="mt-2" style="color: red;">{{
-                            errors.phone
-                        }}</div>
+        errors.phone
+    }}</div>
                     </v-col>
                     <v-col cols="12" style="font-size: 13px;">
                         <div class="d-flex mb-2">
@@ -67,7 +68,7 @@
                         <v-text-field label="Nhập link ảnh avatar" style="background-color: white;" density="compact"
                             v-model="file" @change="handleImageChange" single-line hide-details type="file" clearable
                             variant="outlined"></v-text-field>
-
+                        <!-- <img v-if="selectedImage" :src="selectedImage" style="width: 200px; height: 200px;" alt="1" /> -->
                         <!-- <div v-show="errors.file" class="mt-2" style="color: red;">{{
                             errors.file
                         }}</div> -->
@@ -87,6 +88,7 @@
         </v-card>
     </v-dialog>
 </template>
+
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
 const dialog = ref(false);
@@ -99,10 +101,12 @@ const imageFile = ref(null);
 import { userServiceApi } from '@/components/Admin/User/Service/user.api';
 import { showSuccessNotification, showErrorNotification } from '../../../../common/helpers';
 import { FORM_VALIDATION, Regex } from '../../../../common/constants';
-
+const selectedImage = ref(null)
 const handleImageChange = (event) => {
     imageFile.value = event.target.files[0];
+    // selectedImage.value = URL.createObjectURL(imageFile.value);
 };
+
 
 const { errors, handleSubmit, resetForm, defineField } = useForm({
     validationSchema: yup.object({
@@ -149,9 +153,15 @@ const [birthday, birthdayAttrs] = defineField('birthday');
 const [avatar, avatarAttrs] = defineField('avatar');
 const [phone, phoneAttrs] = defineField('phone');
 const [id] = defineField('id');
-const [file, fileAttrs] = defineField('file');
+const [file, fileAttrs] = defineField('file', '');
 const isDisabled = computed(() => props.currentValue !== '' ? true : false);
-
+// watch(() => file.value, (newValue, oldValue) => {
+//     if (newValue === null || newValue === undefined || newValue === '') {
+//         selectedImage.value = null;
+//     } else {
+//         selectedImage.value = oldValue;
+//     }
+// });
 
 watch(() => props.currentValue, (newValue, oldValue) => {
     if (newValue === '') {
@@ -159,10 +169,10 @@ watch(() => props.currentValue, (newValue, oldValue) => {
     } else {
         imageFile.value = '';
         file.value = '';
+        avatar.value = newValue.avatar;
         name.value = newValue.name;
         birthday.value = newValue.birthday;
         email.value = newValue.email;
-        avatar.value = newValue.avatar;
         phone.value = newValue.phone;
         id.value = newValue.id;
     }
@@ -189,7 +199,7 @@ const createNewUser = handleSubmit(async values => {
             formData.append('email', values.email);
             formData.append('phone', values.phone);
             formData.append('file', imageFile.value);
-            formData.append('password', '12345678');
+            formData.append('password', '12345678a');
             const res = await userServiceApi.createUser(formData);
             if (res.success) {
                 showSuccessNotification(res.message)
@@ -228,4 +238,5 @@ const createNewUser = handleSubmit(async values => {
 });
 
 </script>
+
 <style></style>

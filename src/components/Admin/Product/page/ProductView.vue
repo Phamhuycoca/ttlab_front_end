@@ -13,7 +13,7 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-col cols="12">
+            <v-col cols="12" style="margin-top: -24px;">
                 <v-card style="border-radius: 16px; border: 1px;">
                     <v-table density="compact">
                         <thead>
@@ -47,10 +47,8 @@
                                     </b></td>
                                 <td>${{ formatNumberWithCommas(item.price) }}</td>
                                 <td>{{ formatNumberWithCommas(item.quantity) }}</td>
-                                <td style="width: 250px;height: 58px;" class="v-text-truncate">
-                                    <p
-                                        style="width: 100%;max-height: 58px;overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;">
-                                        {{ item.description }}</p>
+                                <td style="max-width: 250px;height: 58px;" class="text-truncate">
+                                    {{ item.description }}
                                 </td>
                                 <td>
                                     <v-img style="border-radius: 2px;" width="36" height="36" :src="item.image"></v-img>
@@ -64,7 +62,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr v-else>
+                            <tr v-else style="height: 58px;">
                                 <td colspan="6">
                                     <p class="text-center text-red">Không có dữ liệu</p>
                                 </td>
@@ -107,7 +105,7 @@
             @Remove="Remove()" />
     </div>
 </template>
-  
+
 <script setup lang="ts">
 import icon_delete from "@/assets/trash.png"
 import icon_edit from "@/assets/edit.png"
@@ -181,6 +179,7 @@ onMounted(() => {
     loadData();
 });
 </script>
+
 <style scoped>
 body {
     font-family: 'Public Sans', sans-serif;

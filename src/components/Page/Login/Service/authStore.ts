@@ -28,6 +28,13 @@ export const useAuthStore = defineStore('authStore', () => {
     const res=await authApi.forgot(email);
     return res;
   }
+
+  async function register(data:any) {
+    const res=await authApi.register(data);
+    return res;
+  }
+
+
   const isAuthenticated = computed(() => {
     const token = localStorageAuthService.getAccessToken();
     const expiredAt = localStorageAuthService.getAccessTokenExpiredAt();
@@ -40,6 +47,7 @@ export const useAuthStore = defineStore('authStore', () => {
     login,
     hasToken,
     isAuthenticated,
-    forgot_password
+    forgot_password,
+    register
   };
 });

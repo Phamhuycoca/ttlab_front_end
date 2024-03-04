@@ -16,6 +16,16 @@ class AuthApiService extends ApiService {
       },
     });
   }
+  register(data:any): Promise<IBodyResponse<any>>{
+    console.log(data);
+    const formdata=new FormData();
+    formdata.append('email',data.email);
+    formdata.append('name',data.name);
+    formdata.append('password',data.password);
+    return this.client.post(`${this.baseUrl}/register`, formdata);
+  }
+
+
   logout(): Promise<IBodyResponse<Record<string, unknown>>> {
     return this.client.post(`${this.baseUrl}/logout`);
   }
