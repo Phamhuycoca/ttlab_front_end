@@ -1,75 +1,75 @@
 <template>
     <div>
-        <v-row class="ml-3 mt-3">
-            <v-col cols="4" sm="6" md="6" lg="2">
-                <v-select v-model="SelectedCategory" density="compact" label="SORT BY" :items="['All', 'Quần', 'Áo']"
-                    variant="outlined"></v-select>
-            </v-col>
-            <v-col cols="4" sm="6" md="6" lg="2">
-                <v-select v-model="selectedSort" density="compact" :items="['Từ cao -> thấp', 'Từ thấp -> cao']"
-                    variant="outlined"></v-select>
-            </v-col>
-            <v-col cols="4" sm="6" md="6" lg="2">
-                <v-select v-model="selectedThree" density="compact"
-                    :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-                    variant="outlined"></v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="6" lg="6" class="text-right">
-                <v-btn style="background-color: #EBF2FF;color:#0f0f13;max-width: 256px;height: 36px;"
-                    class="rounded-1 text-capitalize font-weight-regular" variant="text">
-                    Show
-                    <span class="text-lowercase ml-1"> all</span>
-                </v-btn>
-                <v-btn style="font-weight: 400;color: rgb(34, 100, 209);" bg-color="white" class="rounded-1 text-capitalize"
-                    elevation="2">
-                    Auction
-                </v-btn>
-                <v-btn style="background-color:#EBF2FF;;color:#0f0f13" class="rounded-1 text-capitalize font-weight-regular"
-                    variant="text">
-                    Buy
-                    <span class="text-lowercase ml-1"> now</span>
-                </v-btn>
-                <v-btn style="background-color: #EBF2FF;" class="ml-5" ariant="tonal" elevation="0">
-                    <v-icon>mdi mdi-menu</v-icon>
-                </v-btn>
-                <v-btn class="mr-5" variant="elevated">
-                    <v-icon style="color: #0c5bda;">mdi mdi-microsoft</v-icon>
-                </v-btn>
-            </v-col>
-        </v-row>
-        <v-row class="mr-3 ml-1">
-            <v-col cols="12">
-                <v-chip variant="text"><span class="mt-2" style="font-weight: 550;">Related</span></v-chip>
-                <v-chip class="mr-2 mt-2">
-                    worldwide shipping
-                </v-chip>
-                <v-chip class="mr-2 mt-2">
-                    under $50
-                </v-chip>
-                <v-chip class="mr-2 mt-2">
-                    kitten
-                </v-chip>
-                <v-chip class="mr-2 mt-2">
-                    plastic plugs
-                </v-chip>
-                <v-chip class="mr-2 mt-2">
-                    pucker shoes
-                </v-chip>
-                <v-chip class="mr-2 mt-2">
-                    vintage typewriter
-                </v-chip>
-            </v-col>
-        </v-row>
-        <v-card class="custom-shadow">
+        <v-card class="custom-shadow" elevation="1">
+            <v-row class="ml-3 mt-3">
+                <v-col cols="4" sm="6" md="6" lg="2">
+                    <v-select v-model="SelectedCategory" density="compact" label="SORT BY"
+                        :items="['All', 'Quần', 'Áo']" variant="outlined"></v-select>
+                </v-col>
+                <v-col cols="4" sm="6" md="6" lg="2">
+                    <v-select v-model="selectedSort" density="compact" :items="['Từ cao -> thấp', 'Từ thấp -> cao']"
+                        variant="outlined"></v-select>
+                </v-col>
+                <v-col cols="4" sm="6" md="6" lg="2">
+                    <v-select v-model="selectedThree" density="compact"
+                        :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                        variant="outlined"></v-select>
+                </v-col>
+                <v-col cols="12" sm="6" md="6" lg="6" class="text-right">
+                    <v-btn style="background-color: #EBF2FF;color:#0f0f13;max-width: 256px;height: 36px;"
+                        class="rounded-1 text-capitalize font-weight-regular" variant="text">
+                        Show
+                        <span class="text-lowercase ml-1"> all</span>
+                    </v-btn>
+                    <v-btn style="font-weight: 400;color: rgb(34, 100, 209);" bg-color="white"
+                        class="rounded-1 text-capitalize" elevation="2">
+                        Auction
+                    </v-btn>
+                    <v-btn style="background-color:#EBF2FF;;color:#0f0f13"
+                        class="rounded-1 text-capitalize font-weight-regular" variant="text">
+                        Buy
+                        <span class="text-lowercase ml-1"> now</span>
+                    </v-btn>
+                    <v-btn style="background-color: #EBF2FF;" class="ml-5" ariant="tonal" elevation="0">
+                        <v-icon>mdi mdi-menu</v-icon>
+                    </v-btn>
+                    <v-btn class="mr-5" variant="elevated">
+                        <v-icon style="color: #0c5bda;">mdi mdi-microsoft</v-icon>
+                    </v-btn>
+                </v-col>
+            </v-row>
+            <v-row class="mr-3 ml-1">
+                <v-col cols="12">
+                    <v-chip variant="text"><span class="mt-2" style="font-weight: 550;">Related</span></v-chip>
+                    <v-chip class="mr-2 mt-2">
+                        worldwide shipping
+                    </v-chip>
+                    <v-chip class="mr-2 mt-2">
+                        under $50
+                    </v-chip>
+                    <v-chip class="mr-2 mt-2">
+                        kitten
+                    </v-chip>
+                    <v-chip class="mr-2 mt-2">
+                        plastic plugs
+                    </v-chip>
+                    <v-chip class="mr-2 mt-2">
+                        pucker shoes
+                    </v-chip>
+                    <v-chip class="mr-2 mt-2">
+                        vintage typewriter
+                    </v-chip>
+                </v-col>
+            </v-row>
             <v-row class="mr-3 ml-3 mt-1">
-                <v-col class="d-flex flex-column justify-center align-center" v-for="item in products" :key="item" cols="12"
-                    sm="6" md="4" lg="3">
+                <v-col class="d-flex flex-column justify-center align-center" v-for="item in products" :key="item"
+                    cols="12" sm="6" md="4" lg="3">
                     <v-card hover variant="flat" style="min-height: 472px;width: 250px;" class="mb-3 my-card">
                         <v-img class="mx-auto mt-2" width="220px" height="224px" :src="item.url"
                             alt="Product Image"></v-img>
                         <v-card-text class="my-card-text"
                             style="max-width: 227px;font-size: 16px;line-height: 24px; height: 90px;font-family: 'Inter', sans-serif;color: #19191D;">{{
-                                item.name }}</v-card-text>
+                        item.name }}</v-card-text>
                         <v-card-text class="mt-2 mx-auto"
                             style="font-family: 'Inter', sans-serif;color:#000000;max-width: 250px;font-size: 24px;font-weight: 700;padding: auto;height: 36px;">
                             {{ item.price }}
@@ -113,7 +113,7 @@
         </div>
     </div>
 </template>
-  
+
 <script setup lang="ts">
 import { ref, reactive, computed } from "vue"
 import product1 from "@/assets/01.png"
@@ -186,8 +186,8 @@ const filteredProducts = computed(() => {
     }
 });
 </script>
-  
-<style>
+
+<style scoped>
 .custom-shadow {
     margin-top: 10px;
     border-radius: 4px;

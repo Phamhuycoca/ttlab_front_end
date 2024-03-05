@@ -1,139 +1,217 @@
 <template>
     <div>
-        <v-app-bar :elevation="0">
-            <v-row class="d-flex justify-center align-center">
-                <v-col lg="4" md="4" sm="12" class="d-flex justify-content align-center" style="margin-left:80px;">
-                    <v-app-bar-title class="font-weight-black" style="font-family: 'Integral CF', sans-serif;
-    font-size: 32px;
-    line-height: 38.4px;
-    font-size: 32px;
-    letter-spacing: 0em;
-    text-align: left;
-    width:160px;">SHOP.CO</v-app-bar-title>
-                    <div
-                        style="width:56px;height:22px;font-family:'Satoshi',sans-serif;font-weight:400;font-size:14px;line-height:21.6px;">
-                        Shop
-                    </div>
-                    <div class="mr-4"
-                        style="width:56px;height:22px;font-family:'Satoshi',sans-serif;font-weight:400;font-size:14px;line-height:21.6px;">
-                        On sale</div>
-                    <div class="mr-4"
-                        style="width:87px;height:22px;font-family:'Satoshi',sans-serif;font-weight:400;font-size:14px;line-height:21.6px;">
-                        New Arrivals</div>
-                    <div
-                        style="width:56px;height:22px;font-family:'Satoshi',sans-serif;font-weight:400;font-size:14px;line-height:21.6px;">
-                        Brands</div>
-                </v-col>
-                <v-col lg="5">
-                    <v-text-field density="compact" variant="solo-filled" label="Search for products..."
-                        style="max-width: 577px; background-color: #ededf0; border-radius: 62px!important;"
-                        prepend-inner-icon="mdi-magnify" clearable single-line flat hide-details rounded></v-text-field>
-                </v-col>
-                <v-col lg="1" class="d-flex justify-content align-center" style="margin-left:-30px;">
-                    <v-icon class="mr-4">mdi-cart-outline</v-icon>
-                    <v-icon>mdi-account-circle-outline</v-icon>
-                </v-col>
+        <v-app-bar :elevation="0" rounded>
+            <v-row style="max-width: 208px; max-height: 88px">
+                <v-img src="../../assets/image/Logo.png" width="208px" height="88px"></v-img>
             </v-row>
+            <v-app-bar-title style="
+          max-width: 143px;
+          max-height: 32px;
+          font-weight: 500;
+          font-family: 'Inter', sans-serif;
+          font-size: 20px;
+          line-height: 31.6px;
+          color: #5a5b6a;
+        ">
+                Sell on Shopka
+            </v-app-bar-title>
+            <v-app-bar-title style="
+          max-width: 80px;
+          max-height: 32px;
+          font-weight: 400;
+          font-family: 'Inter', sans-serif;
+          font-size: 20px;
+          line-height: 31.6px;
+          color: #5a5b6a;
+          margin-right: 2%;
+        ">
+                Register
+            </v-app-bar-title>
+            <v-text-field density="compact" variant="solo-filled" label="Search for products..." style="
+          max-width: 668px;
+          max-height: 48px;
+          background-color: #ededf0;
+          border-radius: 62px !important;
+        " v-model="search" prepend-inner-icon="mdi-magnify" clearable single-line flat hide-details
+                rounded></v-text-field>
+            <v-app-bar-title style="
+          max-width: 210px;
+          max-height: 32px;
+          font-weight: 400;
+          font-family: 'Inter', sans-serif;
+          font-size: 20px;
+          line-height: 31.6px;
+          color: #2264d1;
+        ">
+                Consumer Electronics
+            </v-app-bar-title>
+            <template v-slot:append>
+                <v-btn variant="outlined" color="#2264D1" width="104px" height="40px" class="mr-2">
+                    <span class="text-capitalize" style="
+              font-family: 'Quicksand', sans-serif;
+              font-weight: 700;
+              font-size: 20px;
+              line-height: 30px;
+              color: #2264d1;
+            ">Sign</span>
+                    <p class="text-lowercase" style="
+              font-family: 'Quicksand', sans-serif;
+              font-weight: 700;
+              font-size: 20px;
+              line-height: 30px;
+              color: #2264d1;
+            ">
+                        in
+                    </p>
+                </v-btn>
+                <div class="ml-2 mr-2" style="position: relative">
+                    <div style="
+              position: absolute;
+              background-color: #f44336;
+              color: #ffffff;
+              border-radius: 50%;
+              max-width: 20px;
+              max-height: 20px;
+              right: 0;
+              font-size: 14px;
+              line-height: 17.5px;
+              top: -8px;
+              margin: auto;
+              z-index:1000;
+            ">
+                        <span style="padding: 10px;text-align: center;align-items: center;">5</span>
+                    </div>
+                    <v-btn width="99px" height="40px" elevation="2" color="#2979FF">
+                        <span class="text-capitalize" style="
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 30px;
+                color: #2264d1;
+              ">My</span>
+                        <p class="text-lowercase" style="
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 30px;
+                color: #2264d1;
+              ">
+                            cart
+                        </p>
+                    </v-btn>
+                </div>
+                <v-avatar class="ml-2">
+                    <v-img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" width="40px"
+                        height="40px"></v-img>
+                </v-avatar>
+            </template>
         </v-app-bar>
         <div>
-            <v-row>
-                <v-col lg="12" md="12" sm="12">
-                    <v-img src="../../assets//image/Rectangle 2.png" height="663px" width="100%" cover>
-                        <div class="fill-height absolute-fill" align="left" justify="center">
-                            <v-row style="margin-top: 5%;">
-                                <v-col cols="1"></v-col>
-                                <v-col cols="5">
-                                    <p style="color: #000000;font-size:64px;font-weight:700;line-height: 64px;">FIND CLOTHES
-                                        THAT
-                                        MATCHES YOUR STYLE</p>
-                                    <p class="text-left" style="color: #000000;opacity: 0.6;margin-top: 32px">Browse through
-                                        our
-                                        diverse range of meticulously crafted garments, designed to bring out your
-                                        individuality
-                                        and
-                                        cater to your sense of style.</p>
-                                    <v-btn class="text-capitalize"
-                                        style="color: white;background-color: #000000; width: 210px;height: 52px;font-size: 16px;margin-top: 32px;"
-                                        rounded>Shop Now</v-btn>
-                                    <v-row style="margin-top: 48px;height: 74px;">
-                                        <div>
-                                            <b style="font-size: 40px;">200 +</b>
-                                            <p style="opacity: 0.6;font-size: 16px;">International Brands</p>
-                                        </div>
-                                        <v-divider vertical class="mx-5 border-opacity-100"></v-divider>
-                                        <div>
-                                            <b style="font-size: 40px;">2,000 +</b>
-                                            <p style="opacity: 0.6;font-size: 16px;">High-Quality Products</p>
-                                        </div>
-                                        <v-divider vertical class="mx-5 border-opacity-100"></v-divider>
-                                        <div>
-                                            <b style="font-size: 40px;">30,000 +</b>
-                                            <p style="opacity: 0.6;font-size: 16px;">Happy Customers</p>
-                                        </div>
-                                    </v-row>
-                                </v-col>
-                                <v-col cols="1">
-                                    <v-img src="../../assets/image/Vector-1.png" cover width="56px" height="56px"
-                                        style="top: 48%;left: 20%;"></v-img>
-                                </v-col>
-                                <v-col cols="5" lg="5" md="8" sm="12">
-                                    <v-img src="../../assets//image//Vector-2.png" cover width="104px" height="104px"
-                                        style="left: 70%;"></v-img>
-                                </v-col>
-                            </v-row>
-                        </div>
-                    </v-img>
-                </v-col>
-            </v-row>
-        </div>
-        <div style="height: 122px;background-color: #000000;" class="d-flex justify-content align-center">
-            <v-img src="../../assets/Versace.png" contain width="166.48px" height="33.16px"></v-img>
-            <v-img src="../../assets/Zara.png" contain width="91px" height="38px"></v-img>
-            <v-img src="../../assets/gucci-logo-1 1.png" contain width="156px" height="36px"></v-img>
-            <v-img src="../../assets/prada-logo-1 1.png" contain width="194px" height="32px"></v-img>
-            <v-img src="../../assets/Calvin.png" contain width="206.79px" height="33.35px"></v-img>
-        </div>
-        <div
-            style="font-family: 'Integral CF', sans-serif;font-weight: 900;font-size: 48px;line-height: 57.6px;text-align:center;">
-            NEW ARRIVALS
-        </div>
-        <div class="d-flex justify-center space-evenly" style="background-color: red;">
-            <div class="mt-10" v-for="item in 4" :key="item">
-                <div>
-                    <v-img src="../../assets/image/image 7.png" width="295px" height="298px" style="border-radius: 20px;"
-                        contain></v-img>
-                </div>
-                <div
-                    style="font-family:'Satoshi',sans-serif;color: #000000;font-size: 14px;line-height: 27px;font-weight: 700;">
-                    T-SHIRT WITH TAPE DETAILS
-                </div>
-                <div>
-                    <v-row>
-                        <v-col cols="5" class="d-flex justify-content align-center">
-                            <v-icon color="#FFC633" size="x-small">mdi mdi-star</v-icon>
-                            <v-icon color="#FFC633" size="x-small">mdi mdi-star</v-icon>
-                            <v-icon color="#FFC633" size="x-small">mdi mdi-star</v-icon>
-                            <v-icon color="#FFC633" size="x-small">mdi mdi-star</v-icon>
-                            <v-icon color="#FFC633" v-if="4.56 < 5 && 4.56 > 4" size="x-small">mdi
-                                mdi-star-half</v-icon>
-                            <div
-                                style="font-family:'Satoshi',sans-serif;font-weight: 400;font-size: 14px;line-height: 18.9px;">
-                                4.5/5
-                            </div>
-                        </v-col>
-                    </v-row>
-                </div>
-                <div
-                    style="font-family:'Satoshi',sans-serif;font-weight: 700;font-size: 24px;line-height: 32.4px;color: #000000;">
-                    $120
-                </div>
-            </div>
+            <v-row class="d-flex justify-center">
+                <v-tabs v-model="tab" align-tabs="start" stacked height="56px" color="#EBF2FF">
+                    <v-tab value="tab-1" height="56px">
+                        <v-img src="../../assets/icon/hanger.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #2979FF;">Clothing
+                            &
+                            Shoes</span>
+                    </v-tab>
+                    <v-tab value="tab-2">
+                        <v-img src="../../assets/icon/cinema.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Entertainment</span>
+                    </v-tab>
 
+                    <v-tab value="tab-3">
+                        <v-img src="../../assets/icon/concert.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Music</span>
+                    </v-tab>
+                    <v-tab value="tab-4">
+                        <v-img src="../../assets/icon/fitness.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Sport
+                            & Lifestyle</span>
+                    </v-tab>
+                    <v-tab value="tab-5">
+                        <v-img src="../../assets/icon/pets.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Pets</span>
+                    </v-tab>
+                    <v-tab value="tab-6">
+                        <v-img src="../../assets/icon/restaraunt.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Kitchen
+                            Accessories</span>
+                    </v-tab>
+                    <v-tab value="tab-7">
+                        <v-img src="../../assets/icon/observation.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Travel
+                            Equipment</span>
+                    </v-tab>
+                    <v-tab value="tab-8">
+                        <v-img src="../../assets/icon/barley.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Growing
+                            & Garden</span>
+                    </v-tab>
+                    <v-tab value="tab-5">
+                        <v-img src="../../assets/icon/powerstation.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Electrical
+                            Tools</span>
+                    </v-tab>
+                    <v-tab value="tab-5">
+                        <v-img src="../../assets/icon/babysitter.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Mother
+                            Care</span>
+                    </v-tab>
+                    <v-tab value="tab-5">
+                        <v-img src="../../assets/icon/nuclear-station.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Toys
+                            &
+                            Entertainment</span>
+                    </v-tab>
+                    <v-tab value="tab-5">
+                        <v-img src="../../assets/icon/ship-wheel.png" width="20px" height="20px"></v-img>
+                        <span class="text-capitalize"
+                            style="font-size: 14px;font-family: 'Inter', sans-serif;font-weight: 400;color: #787885;">Vintage</span>
+                    </v-tab>
+                </v-tabs>
+                <v-window v-model="tab" style="width: 89.1%">
+                    <v-window-item v-for="i in tab" :key="i" :value="'tab-' + i">
+                        <v-row>
+                            <v-col cols="3" lg="3" md="3" sm="3">
+                                <CardView />
+                            </v-col>
+                            <v-col cols="9" lg="9" md="9" sm="9">
+                                <HomeView />
+                            </v-col>
+                        </v-row>
+                    </v-window-item>
+                </v-window>
+            </v-row>
         </div>
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import HomeView from '../HomeView.vue'
+import CardView from '../page/CardView.vue'
+import { ref } from "vue";
+
+const search = ref("useless items on white background");
+const tab = ref(null);
+const text = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat')
 </script>
 
-<style ></style>
+<style scoped>
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif !important;
+}
+</style>
