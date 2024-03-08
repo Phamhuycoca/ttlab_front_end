@@ -48,7 +48,9 @@
                                 <td>${{ formatNumberWithCommas(item.price) }}</td>
                                 <td>{{ formatNumberWithCommas(item.quantity) }}</td>
                                 <td style="max-width: 250px;height: 58px;" class="text-truncate">
+                                    <!-- {{ item.description === "undefined" ? '' : item.description }} -->
                                     {{ item.description }}
+
                                 </td>
                                 <td>
                                     <v-img style="border-radius: 2px;" width="36" height="36" :src="item.image"></v-img>

@@ -17,17 +17,21 @@
                 </v-row>
             </v-toolbar>
             <v-list density="compact" nav>
-                <!-- <v-list-item v-show="this.rail == false" class="text-uppercase"
-                    style="opacity: 0.6;font-size: 13px;">Quản
-                    lý sản phẩm</v-list-item> -->
-                <!-- <v-list-item prepend-icon="mdi-apps" title="Sản phẩm" value="Sản phẩm"
-                    to='/admin/sanpham'></v-list-item> -->
-                <!-- <v-list-item prepend-icon="mdi-account-group" title="User" value="User" to='user'></v-list-item> -->
+                <v-list-item v-show="this.rail == false" class="text-uppercase ml-1"
+                    style="line-height: 14px; font-weight: 400;font-size: 11px;font-family: Public Sans, sans-serif;color: #8B909A;">Quản
+                    lý sản phẩm</v-list-item>
                 <v-list-item style="color: #8B909A;font-size: 24px;" to='/admin/sanpham'>
                     <div style="display: flex; align-items: flex-start;">
-                        <img src="https://res.cloudinary.com/dyo42vgdj/image/upload/v1709198095/box_fcjahg.png"
-                            style="width: 22px; height: 22px;"><img>
-                        <div
+                        <!-- <img src="https://res.cloudinary.com/dyo42vgdj/image/upload/v1709198095/box_fcjahg.png"
+                            style="width: 22px; height: 22px;"><img> -->
+                        <v-img v-if="this.$router.currentRoute.value.name === 'product'" src="../assets/icon/box.png"
+                            style="width: 22px; height: 22px;"></v-img>
+                        <v-img v-else src="../assets/box_2.png" style="width: 22px; height: 22px;"></v-img>
+                        <div class="font-weight-medium" v-if="this.$router.currentRoute.value.name === 'product'"
+                            style="width: 170px; height: 22px; margin-left: 8px; font-family: Public Sans, sans-serif; font-size: 15px; font-weight: 400; line-height: 22px; color: #23272E;">
+                            Sản Phẩm
+                        </div>
+                        <div v-else class="font-weight-medium"
                             style="width: 170px; height: 22px; margin-left: 8px; font-family: Public Sans, sans-serif; font-size: 15px; font-weight: 400; line-height: 22px; color: #8B909A;">
                             Sản Phẩm
                         </div>
@@ -35,11 +39,16 @@
                 </v-list-item>
                 <v-list-item style="color: #8B909A;font-size: 24px;" to='/admin/user'>
                     <div style="display: flex; align-items: flex-start;">
-                        <img src="https://res.cloudinary.com/dyo42vgdj/image/upload/v1709197932/users_ru17it.jpg"
-                            style="width: 22px; height: 22px;"><img>
-                        <div
+                        <v-img v-if="this.$router.currentRoute.value.name === 'user'" src="../assets/users_2.png"
+                            style="width: 22px; height: 22px;"></v-img>
+                        <v-img v-else src="../assets/icon/users.png" style="width: 22px; height: 22px;"></v-img>
+                        <div class="font-weight-medium" v-if="this.$router.currentRoute.value.name === 'user'"
+                            style="width: 170px; height: 22px; margin-left: 8px; font-family: Public Sans, sans-serif; font-size: 15px; font-weight: 400; line-height: 22px; color: #23272E;">
+                            Users
+                        </div>
+                        <div class="font-weight-medium" v-else
                             style="width: 170px; height: 22px; margin-left: 8px; font-family: Public Sans, sans-serif; font-size: 15px; font-weight: 400; line-height: 22px; color: #8B909A;">
-                            User
+                            Users
                         </div>
                     </div>
                 </v-list-item>
@@ -54,10 +63,12 @@
             <v-spacer></v-spacer>
             <v-btn>
                 <v-badge content="5" color="red">
-                    <v-icon>mdi-bell</v-icon>
+                    <!-- <v-icon style="width: 26px;height: 26px;">mdi-bell-outline</v-icon> -->
+                    <v-img src="../assets/icon/bell.png" style="width: 26px; height: 26px;"></v-img>
+
                 </v-badge>
             </v-btn>
-            <v-avatar class="mr-4" id="menu-activator" style="cursor: pointer;">
+            <v-avatar class="mr-1" id="menu-activator" style="cursor: pointer;">
                 <v-img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"></v-img>
             </v-avatar>
             <v-menu activator="#menu-activator" style="cursor: pointer;" width="200">

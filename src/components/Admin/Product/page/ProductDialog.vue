@@ -1,4 +1,3 @@
-
 <template>
     <v-dialog max-width="500px" v-model="dialog">
         <v-card style="border-radius:10px;">
@@ -16,8 +15,8 @@
                             single-line hide-details variant="outlined" v-model="name"></v-text-field>
                         <div v-show="errors.name" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
-                                errors.name
-                            }}</div>
+        errors.name
+    }}</div>
                     </v-col>
                     <v-col cols="12" style="font-size: 13px;">
                         <div class="d-flex mb-2">
@@ -28,8 +27,8 @@
                             single-line hide-details type="number" variant="outlined" v-model="price"></v-text-field>
                         <div v-show="errors.price" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
-                                errors.price
-                            }}</div>
+        errors.price
+    }}</div>
                     </v-col>
                     <v-col cols="12" style="font-size: 13px;">
                         <div class="d-flex mb-2">
@@ -40,8 +39,8 @@
                             single-line hide-details type="number" variant="outlined" v-model="quantity"></v-text-field>
                         <div v-show="errors.quantity" text-subtitle-1 text-medium-emphasis class="mt-2 ml-2"
                             style="color: red;">{{
-                                errors.quantity
-                            }}</div>
+        errors.quantity
+    }}</div>
                     </v-col>
                     <v-col cols="12" style="font-size: 13px;">
                         <p>Mô tả</p>
@@ -133,6 +132,8 @@ const [price, priceAttrs] = defineField('price');
 const [quantity, quantityAttrs] = defineField('quantity');
 const [file, fileAttrs] = defineField('file');
 const [description] = defineField('description');
+
+
 const [id] = defineField('id');
 
 watch(() => props.currentValue, (newValue, oldValue) => {
@@ -170,12 +171,13 @@ const showErrors = (errors: string[]) => {
 
 const createProduct = handleSubmit(async values => {
     try {
+        console.log(values.description);
         if (props.currentValue == '') {
             const formData = new FormData();
             formData.append('name', values.name);
             formData.append('price', values.price);
             formData.append('quantity', values.quantity);
-            formData.append('description', values.description);
+            formData.append('description', values.description ? values.description : '');
             formData.append('file', imageFile.value);
             const res = await productServiceApi.createProduct(formData);
             if (res.success) {
