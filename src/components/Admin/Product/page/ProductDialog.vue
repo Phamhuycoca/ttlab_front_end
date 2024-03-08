@@ -177,7 +177,7 @@ const createProduct = handleSubmit(async values => {
             formData.append('name', values.name);
             formData.append('price', values.price);
             formData.append('quantity', values.quantity);
-            formData.append('description', values.description ? values.description : '');
+            formData.append('description', values.description === undefined ? '' : values.description);
             formData.append('file', imageFile.value);
             const res = await productServiceApi.createProduct(formData);
             if (res.success) {
@@ -197,7 +197,7 @@ const createProduct = handleSubmit(async values => {
             formData.append('name', values.name);
             formData.append('price', values.price);
             formData.append('quantity', values.quantity);
-            formData.append('description', values.description);
+            formData.append('description', values.description ? values.description : '');
             formData.append('file', imageFile.value);
             formData.append('id', id.value);
             const res = await productServiceApi.updateProduct(id.value, formData);

@@ -5,7 +5,6 @@ import { showWarningsNotification, showErrorNotification } from '@/common/helper
 import { HttpStatus, PageName } from '@/common/constants';
 
 export const logout = (redirectToLogin = true) => {
-  alert('refresh_token 1');
   localStorageAuthService.resetAll();
   const currentPage = router.currentRoute;
   if (redirectToLogin && currentPage.value.name !== PageName.LOGIN_PAGE) {
@@ -47,8 +46,6 @@ export const sendRefreshToken = async () => {
     return;
   } catch (error) {
     showErrorNotification('Vui lòng đăng nhập lại');
-    console.log('utils');
-    console.log(error);
     logout(true);
     return;
   }
